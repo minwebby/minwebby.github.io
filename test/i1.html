@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aurora</title>
+	</head>
+	<body onload="init();">
+
+		<img src="/src/theme/img/header.jpg" id="img">
+		<script type="text/javascript" src="/bower_components/threejs/build/three.js"></script>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+			varying vec2 vUv;
+			void main()
+			{
+				vUv = uv;
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		</script>
+		<script id="fragmentShader" type="x-shader/x-fragment">
+			uniform float time;
+			uniform vec2 resolution;
+			uniform sampler2D texture;
+			varying vec2 vUv;
+
+			void main( void ) {
+				vec3 color = texture2D( texture, vUv).rgb;
+				float rTime = sin(time);
+				float f1 = sin(vUv.x * rTime) / 100.0;
+				float f2 = cos(vUv.y * rTime) / 100.0;
+				float gray = 0.3 * color.r + 0.59 * color.g + 0.11 * color.b;
+				float grayDiff = sin(time/100.0) / 10.0;
+				vec2 neUV = vec2(vUv.x + f1, vUv.y + f2);
+				vec3 clr;
+				if (neUV.x >= 0.0 && neUV.x <= 1.0 && neUV.y >= 0.0 && neUV.y <= 1.0 && neUV.y > 0.22 ) {
+					vec3 ne = texture2D(texture, neUV).rgb;	
+					float sl = abs(neUV.y - (-0.7 * neUV.x));
+					if (neUV.x > 0.0 && (sl < 0.2) ) {
+						clr =  0.8 * ne + 0.2 * color + vec3(grayDiff, grayDiff, grayDiff);
+					} else {
+						clr =  color + vec3(grayDiff, grayDiff, grayDiff);
+					}
+					gl_FragColor = vec4( clr, 1.0 );
+				} else {
+					gl_FragColor = vec4( color, 1.0 );
+				}
+			}
+		</script>
+
+
+		<script type="text/javascript" src="e1.js"></script>
+		<script type="text/javascript">
+			function init() {
+				apply(new Aurora(), "img");
+			}
+		</script>
+	</body>
+</html>
