@@ -124,26 +124,28 @@ aside {
 @media(min-width:768px) {
     .navbar-default {
         border-color: rgba(255,255,255,.3);
-        background-color: transparent;
+        background-color: rgba(240, 240, 250, 0.8);
     }
 
     .navbar-default .navbar-header .navbar-brand {
-        color: rgba(255,255,255,.7);
+        color: #222;
     }
 
     .navbar-default .navbar-header .navbar-brand:hover,
     .navbar-default .navbar-header .navbar-brand:focus {
-        color: #fff;
+        color: #000;
     }
 
     .navbar-default .nav > li>a,
     .navbar-default .nav>li>a:focus {
-        color: rgba(255,255,255,.7);
+        color: rgba(20,20,20,.7);
+
     }
 
     .navbar-default .nav > li>a:hover,
     .navbar-default .nav>li>a:focus:hover {
         color: #fff;
+        background-color: #222;
     }
 
     .navbar-default.affix {
@@ -168,7 +170,7 @@ aside {
 
     .navbar-default.affix .nav > li>a:hover,
     .navbar-default.affix .nav>li>a:focus:hover {
-        color: #f05f40;
+        color: #222;
     }
 }
 
@@ -178,7 +180,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(../img/header.jpg);
+   /* background-image: url(../img/header.jpg);*/
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -208,7 +210,8 @@ header .header-content .header-content-inner p {
     margin-bottom: 50px;
     font-size: 16px;
     font-weight: 300;
-    color: rgba(255,255,255,.7);
+    color: rgb(250,250,250);
+    text-shadow: 1px 1px rgba(0, 0, 0, 1);
 }
 
 @media(min-width:768px) {
@@ -386,8 +389,8 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
     border-color: #f05f40;
-    color: #fff;
-    background-color: #f05f40;
+    color: #222;
+    background-color: rgba(240,240,250,0.8);
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -401,7 +404,7 @@ fieldset[disabled] .btn-default.active {
 .open > .dropdown-toggle.btn-primary {
     border-color: #ed431f;
     color: #fff;
-    background-color: #ee4b28;
+    background-color: rgba(20,20,20,.7);
 }
 
 .btn-primary:active,
@@ -477,6 +480,6 @@ body {
 
 h1.title-text
 {
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
     text-shadow: 1px 1px rgba(20, 20, 20, 0.8);
 }

@@ -1,18 +1,19 @@
 function apply(effect, objectURL) {
-	var img = document.body.appendChild(document.createElement("img"));
+	var par = document.getElementById("mainHeader");
+	var img = par.insertBefore(document.createElement("img"), par.childNodes[0]);
 	img.addEventListener("load", function() {
-		console.log("here");
 		effect.setTarget(img);
 		effect.setForever();
-		document.body.removeChild(img);
+		par.removeChild(img);
 		effect.start();
 	});
 	img.style.position = "absolute";
 	img.width = window.innerWidth;
 	img.height = window.innerHeight;
+	img.style.left = "0px";
+	img.style.top = "0px";
 	img.src = objectURL;
 }
-
 
 function extractImageData(obj) {
 	var par = obj.parentNode;
@@ -33,7 +34,9 @@ function GLCanvas(obj, width, height) {
 	this.camera.position.z = 0;
 	this.renderer = new THREE.WebGLRenderer();
 	this.renderer.setSize(innerWidth, innerHeight);
-	par.appendChild(this.renderer.domElement);
+	par.insertBefore(this.renderer.domElement, par.childNodes[0]);
+	this.renderer.domElement.style.position = "absolute";
+	this.renderer.domElement.style.left = "0px";
 	this.uniforms = {};
 }
 
@@ -56,8 +59,8 @@ GLCanvas.prototype.drawImage = function(image) {
 
 	var material =  new THREE.ShaderMaterial( {
 		uniforms: this.uniforms,
-		vertexShader: document.getElementById( 'vertexShader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+		vertexShader: document.getElementById( 'vs0' ).textContent,
+		fragmentShader: document.getElementById( 'fs0' ).textContent
 
 	} );
 

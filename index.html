@@ -14,7 +14,7 @@
 		<link href="src/theme/css/creative.css" type="text/css" rel="stylesheet" />
 		
 	</head>
-	<body id="page-top">		
+	<body id="page-top" onload="init();">		
 		<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	        <div class="container-fluid">
 	            <div class="navbar-header">
@@ -41,10 +41,10 @@
 	            </div>
 	        </div>
 	    </nav>
-		<header>
+		<header id="mainHeader">
 	        <div class="header-content">
 	            <div class="header-content-inner">
-	                <h1 class="title-text">Special Effects for the Web for everyone</h1>
+	                <h1 class="title-text">Special Effects for the Web sans Coding</h1>
 	                <hr>
 	                <p>Your magical design skills and Webby can add that extra zing to your web projects.</p>
 	                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
@@ -102,6 +102,35 @@
 	        </div>
 	    </section>
 
+	    <script id="vs0" type="x-shader/x-vertex">
+			varying vec2 vUv;
+			void main()
+			{
+				vUv = uv;
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		</script>
+		<script id="fs0" type="x-shader/x-fragment">
+			uniform float time;
+			uniform vec2 resolution;
+			uniform sampler2D texture;
+			varying vec2 vUv;
+			void main( void ) {
+				vec3 color = texture2D( texture, vUv).rgb;
+				float rTime = mod(time, 31.4);
+				float f0 = sin((31.4 * vUv.x) - rTime) / 100.0;
+				float f1 = cos((31.4 * vUv.x) - 2.0*rTime) / 100.0;
+				vec2 neUV = vec2(vUv.x , vUv.y + f0 + f1);
+				vec3 ne = texture2D(texture, neUV).rgb;	
+
+				float gray = 0.3 * color.r + 0.59 * color.g + 0.11 * color.b;
+				float grayDiff = sin(gray * 1.17) / 5.0;
+				vec3 clr =  ne + vec3(grayDiff, grayDiff, grayDiff); 
+				gl_FragColor = vec4( clr, 1.0 );
+			}
+		</script>
+
 
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -112,5 +141,11 @@
 		<script type="text/javascript" src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
 		<script type="text/javascript" src="src/theme/js/creative.js"></script>
 		<script type="text/javascript" src="src/stubs/bg.js"></script>
+		<script type="text/javascript" src="src/stubs/e1.js"></script>
+		<script type="text/javascript">
+			function init() {
+				apply(new Waver(), "/src/theme/img/header.jpg");
+			}
+		</script>
 	</body>
 </html>
