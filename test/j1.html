@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+				cursor:pointer;
+			}
+			#info {
+				color: #fff;
+				position: absolute;
+				top: 10px;
+				width: 100%;
+				text-align: center;
+				z-index: 100;
+				display:block;
+			}
+			#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+		</style>
+	</head>
+
+	<body>
+
+		<script type="x-shader/x-vertex" id="particle_vs">
+			uniform float size;
+			uniform float scale;
+			void main() {
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_PointSize = size * ( scale / length( mvPosition.xyz ) );
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		</script>
+
+		<script type="x-shader/x-fragment" id="particle_fs">
+			uniform vec3 color;
+			uniform float opacity;
+			//uniform sampler2D texture;
+			void main() {
+				//vec4 texColor = texture2D( texture, gl_PointCoord );
+				gl_FragColor = vec4( color, opacity );
+			}
+		</script>
+
+
+		<script type="text/javascript" src="/bower_components/threejs/build/three.js"></script>
+	
+		<script>
+
+			var camera, scene, renderer;
+			var mouseX = 0, mouseY = 0;
+			var windowHalfX = window.innerWidth / 2;
+			var windowHalfY = window.innerHeight / 2;
+
+			var particlesGeometry;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				scene = new THREE.Scene();
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 5000 );
+				camera.position.z = -4;
+
+				renderer = new THREE.WebGLRenderer( { antialias: false }  );
+		  		renderer.setClearColor( 0x000000 );
+		    	renderer.autoClear = true;
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				container.appendChild( renderer.domElement );
+
+
+				//create shared geometry
+				particlesGeometry = new THREE.Geometry();
+				for( var p = 0; p < 10; p++) {
+					var particle = new THREE.Vector3(Math.random()-Math.random(), 
+													 Math.random()-Math.random(), 
+													 Math.random()-Math.random()); 
+					particlesGeometry.vertices.push(particle);
+				}
+				
+				// create particle sets
+				// createParticles();
+				createCustomShaderParticles();
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				window.addEventListener( 'resize', onWindowResize, false );
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+				render();
+			}
+
+			function render() {
+				
+				camera.position.x += ( mouseX/40 - camera.position.x ) * .08;
+				camera.position.y += ( mouseY/40 - camera.position.y ) * .08;
+	
+				camera.lookAt( new THREE.Vector3(0,0,0) ); //tenticle.particleComponent1.displayObject.position
+
+				renderer.clear();
+				renderer.render( scene, camera );
+			}
+
+
+			function onWindowResize() {
+
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				mouseX = ( event.clientX - windowHalfX ) / 2;
+				mouseY = ( event.clientY - windowHalfY ) / 2;
+			}
+
+			/*
+				Create Particles with Point Cloud Material
+			*/
+			function createParticles() {
+
+				
+				var pointCloudMaterial = new THREE.PointCloudMaterial({
+		           size: 1,
+		           color: 0xff0000,
+			       opacity:1,
+		        });	
+
+				var pointCloud = new THREE.PointCloud( particlesGeometry, pointCloudMaterial);
+				pointCloud.sortParticles = true;
+				scene.add( pointCloud );
+			}
+
+			/*
+				Create Particles with Custom Shader Material
+			*/
+			function createCustomShaderParticles() {
+
+				var shader_uniforms = {
+					color:  { type: 'c', value: new THREE.Color( 0x00ff00 ) },
+					size: { type: 'f', value: window.innerHeight  },
+					scale: { type: 'f', value: 1.0 },
+					opacity: { type: 'f', value: 1.0 },
+				   // texture: { type: "t", value: THREE.ImageUtils.loadTexture( "particles/particle.png" ) },
+				};
+
+				var pointCloudShaderMaterial = new THREE.ShaderMaterial( {
+
+			        uniforms: shader_uniforms,
+			        vertexShader: document.getElementById("particle_vs").textContent,
+			        fragmentShader: document.getElementById("particle_fs").textContent,
+			        transparent: true,
+			        opacity:.5,
+
+			    });
+				
+				var pointCloud = new THREE.PointCloud( particlesGeometry, pointCloudShaderMaterial);
+				scene.add( pointCloud );
+			}
+		</script>
+	</body>
+</html>

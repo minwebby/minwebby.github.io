@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aurora</title>
+	</head>
+	<body onload="init();">
+		<div id="effectContainer"></div>
+
+		<script type="text/javascript" src="/bower_components/threejs/build/three.js"></script>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+			uniform float time;
+			uniform float size;
+			uniform float scale;
+			varying vec3 interpNormal;
+			void main()
+			{
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_PointSize = 10.0; 
+				vec4 pos = projectionMatrix * mvPosition;
+				pos.x += sin(time * pos.y );
+				pos.z += cos(time * pos.y);
+				gl_Position = pos;
+				interpNormal = normal;
+			}
+		</script>
+		
+		<script id="fragmentShader" type="x-shader/x-fragment">
+			uniform float yime;
+			uniform float scroll;
+			uniform vec3 color;
+			uniform float opacity;
+			uniform vec3 cameraVec;
+			varying vec3 interpNormal;
+			const vec3 lightPos = vec3(1.0, 1.0, 1.0);
+			void main( void ) {
+				float r = abs(cos(gl_FragCoord.x * interpNormal.x));
+				float g = abs(cos(gl_FragCoord.y * interpNormal.y));
+				float b = abs(sin(gl_FragCoord.z * interpNormal.z));
+				gl_FragColor = vec4( 	r, 
+										g, 
+										b, 
+										1.0 
+									);
+			}
+		</script>
+
+		<script type="text/javascript" src="e4.js"></script>
+		<script type="text/javascript">
+			function init() {
+				debugger;
+				apply(new MonkeyScroll("effectContainer"), "/src/theme/meshes/monkey.json");
+			}
+		</script>
+
+	</body>
+</html>
