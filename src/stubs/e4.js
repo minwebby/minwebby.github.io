@@ -29,7 +29,7 @@ var MonkeyScroll = (function() {
 			that.uniforms = {
 				time: { type: "f", value: 1.0 },
 				scroll: {type: "f", value: 0.0 },
-				color:  { type: 'c', value: new THREE.Color( 0xff0000 ) },
+				color:  { type: 'c', value: new THREE.Color( 0x777777 ) },
 				size: { type: 'f', value: 5.0  },
 				scale: { type: 'f', value: 1.0 },
 				opacity: { type: 'f', value: 1.0 },
@@ -169,7 +169,7 @@ var MonkeyScroll = (function() {
 			if (_cl >= 0.000005) {
 				cv.uniforms.time.value = elapsedTime;
 				if (cv.doRotate) {
-					cv.mainObj.rotation.y += Math.abs(Math.sin(elapsedTime)*0.05);
+					cv.mainObj.rotation.y += Math.abs(Math.sin(elapsedTime)*0.005);
 				} else {
 					cv.mainObj.rotation.y = 0.3;
 				}

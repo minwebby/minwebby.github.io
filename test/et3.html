@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title>three.js webgl - lensflares</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style type="text/css">
+			body {
+				background:#000;
+				padding:0;
+				margin:0;
+				font-weight: bold;
+				overflow:hidden;
+			}
+			#info {
+				position: absolute;
+				top: 10px; width: 100%;
+				color: #ffffff;
+				padding: 5px;
+				font-family: Monospace;
+				font-size: 13px;
+				text-align: center;
+				z-index:100;
+			}
+
+			a {
+				color: orange;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: #0080ff;
+			}
+
+			#stats { position: absolute; top:0; left: 0 }
+			#stats #fps { background: transparent !important }
+			#stats #fps #fpsText { color: #aaa !important }
+			#stats #fps #fpsGraph { display: none }
+		</style>
+	</head>
+
+	<body onload="init();">
+		<div id="info">
+		</div>
+        <div id="effectsSampler" class="width: 1000px;"/>
+		<script src="/bower_components/threejs/build/three.js"></script>
+        <script src="/bower_components/jquery/dist/jquery.js"></script>
+        <script type="text/javascript" src="et3.js"></script>
+        <script type="text/javascript" src="/bower_components/tweenjs/build/tween.min.js"></script>
+        <script type="text/javascript">
+			function init() {
+				Flare.apply(new Flare.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
+			}
+		</script>
+        
+</body>
+</html>
