@@ -65,11 +65,13 @@ GLCanvas.prototype.drawImage = function(image) {
 
 	} );
 
+	console.log(plane);
 	var mesh = new THREE.Mesh(plane, material);
 	mesh.position.x = 0;
 	mesh.position.y = 0;
 	mesh.position.z = 0;
 	this.scene.add(mesh);
+
 
 	this.renderer.render(this.scene, this.camera);
 };

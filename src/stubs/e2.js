@@ -7,7 +7,6 @@ var TorchLight = (function() {
 		_jqParent = $(_parent);
 		var img = _parent.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
-			console.log("here");
 			effect.setTarget(img);
 			effect.setForever();
 			_parent.removeChild(img);

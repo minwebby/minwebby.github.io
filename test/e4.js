@@ -1,27 +1,29 @@
 function apply(effect, mesh) {
-	effect.setMesh(mesh, function() { effect.start() });
+	effect.setMesh(mesh, function() { 
+		effect.start() 
+	});
 }
 
-
-
 function GLCanvas(obj, width, height) {
-	var par = obj.parentNode;
-	console.log(par);
+	var par = obj;
 	this.scene = new THREE.Scene();
-	this.camera = new THREE.PerspectiveCamera(45, width/height, 0.01, 10000);
-	this.camera.position.z = 10.0;
+	this.camera = new THREE.PerspectiveCamera(60, width/height, 0.00001, 10000);
+	this.camera.position.z = 2.8;
 	this.renderer = new THREE.WebGLRenderer({ alpha: true });
 	this.renderer.setSize(width, height);
 	par.appendChild(this.renderer.domElement);
 	this.uniforms = {};
+	this.mainObj = null;
+	this.doRotate = true;
 }
 
 GLCanvas.prototype.loadMesh = function(meshPath, andThen) {
 	var loader = new THREE.JSONLoader();
 	var that = this;
-	
+	var normMat;
 
 	var postLoading = function(geometry, materials) {
+
 		that.uniforms = {
 			time: { type: "f", value: 1.0 },
 			scroll: {type: "f", value: 0.0 },
@@ -44,6 +46,7 @@ GLCanvas.prototype.loadMesh = function(meshPath, andThen) {
 		object.position.x = 0;
 		object.position.y = 0;
 		object.position.z = 0;
+		that.mainObj = object;
 		that.renderer.render(that.scene, that.camera);
 		setTimeout(andThen, 0);
 	};
@@ -85,11 +88,69 @@ function MonkeyScroll(container) {
 	this.glCanvas = null;
 	this.animFrame = null;
 	this.container = document.getElementById(container);
+	this.container.style.position = "absolute";
+	this.container.style.top = "0px";
+	this.animTask = null;
+	this.newScrollPos = 0;
+	this.animTime = 0;
 }
 
+MonkeyScroll.prototype.animCanvas = function() {
+	var that = this, 
+		fn = function() {
+			that.animCanvas.call(that);
+		},
+		pos = $(this.container).position().top, 
+		targ = this.newScrollPos,
+		ease = function(t, fval, tval) {
+			var ts = t * t;
+			var tc = ts * t;
+			return fval + (tval - fval) * (6 * tc * ts -15 * ts * ts + 10 * tc);
+		}
+
+	this.animTime += 0.01;
+	var newpos = pos, changed = false;
+	if ((pos + 5) < targ) {
+		newpos = ease(this.animTime, pos+5, targ);
+		changed = true;
+	} else if ((pos - 5) > targ) {
+		newpos = ease(this.animTime, pos-5, targ);
+		changed = true;
+	}
+
+	if (changed) {
+		this.container.style.top = newpos + "px";
+		this.animTask = setTimeout(fn, 0);
+	} else {
+		this.glCanvas.doRotate = true;
+	}
+};
+
+
+MonkeyScroll.prototype.handleScroll = function(target) {
+	if (this.animTask) {
+		window.clearTimeout(this.animTask)
+		this.animTime = 0;
+	}
+	this.newScrollPos = $(target).scrollTop();
+	var that = this,
+	    fn = function() {
+	    	that.animCanvas.call(that);
+	    };
+	this.glCanvas.doRotate = false;
+	this.animTask = setTimeout(fn, 0);
+};
+
+
 MonkeyScroll.prototype.setMesh = function(targetMesh, andThen) {
-	this.glCanvas = new GLCanvas(this.container, 320, 240);
+	this.glCanvas = new GLCanvas(this.container, window.innerWidth, 300);
 	this.glCanvas.loadMesh(targetMesh, andThen);
+
+	var that = this,
+		fn = function(ev) {
+			that.handleScroll.call(that, ev.currentTarget);
+		};
+	$(window).scroll(fn);
 };
 
 MonkeyScroll.prototype.setForever = function() {
@@ -98,10 +159,16 @@ MonkeyScroll.prototype.setForever = function() {
 
 MonkeyScroll.prototype.start = function() {
 	var _cl = 0;
+	var that = this;
 	var update = function(cv, elapsedTime, delta) {
 		_cl += 1000.0 * delta;
 		if (_cl >= 0.000005) {
 			cv.uniforms.time.value = elapsedTime;
+			if (cv.doRotate) {
+				cv.mainObj.rotation.y += Math.abs(Math.sin(elapsedTime)*0.05);
+			} else {
+				cv.mainObj.rotation.y = 0.3;
+			}
 		}
 	},
 	render = function(cv, elapsedTime, delta) {
