@@ -18,6 +18,142 @@ var SplashColor = (function() {
 		img.src = objectURL;
 	}
 
+	function SplashMask(width, height, splashCycleCount, splatRadius) 
+	{
+		this.width = width;
+		this.height = height;
+		this.size = width * height * 4;
+		this.data = new Float32Array(this.size);
+		for (var i = 0; i < this.size; ++i) {
+			this.data[i] = 0;
+		}
+		this.texture = new THREE.DataTexture(this.data, width, height, THREE.RGBAFormat, THREE.FloatType);
+		this.texture.minFilter = THREE.NearestFilter;
+		this.texture.magFilter = THREE.NearestFilter;
+		this.texture.needsUpdate = true;
+		this.splashCount = 0;
+		this.splashCycle = splashCycleCount;
+		this.splatRadius = splatRadius;
+	}
+
+	SplashMask.prototype.reset = function() {
+		for (var i = 0; i < this.size; ++i) {
+			this.data[i] = 0;
+		}
+		for (i = 3; i < this.size; i += 4) {
+			this.data[i] = 1.0;
+		}
+		this.splashCount = 0;
+		this.texture.needsUpdate = true;
+	};
+
+	SplashMask.prototype.drawLine = function(ox, oy, tx, ty, dx, dy) {
+		var pos, pixs = new Array(100), pc = 0;
+		if (dx > 0) {
+			if (dy > 0) {
+				while (ox < tx && oy < ty) {
+					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
+				}
+			} else {
+				while (ox < tx && oy > ty) {
+					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
+				}
+			}
+		} else {
+			if (dy > 0) {
+				while (ox > tx && oy < ty) {
+					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
+				}
+			} else {
+				while (ox > tx && oy > ty) {
+					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
+				}
+			}
+		}
+		for (var i = 0; i < pc; ++i) {
+			pos = pixs[i];
+			this.data[pos] = 1.0;
+			this.data[pos+1] = 1.0;
+			this.data[pos+2] = 1.0;
+			this.data[pos+3] = 1.0;
+		}
+	};
+
+	SplashMask.prototype.splash = function() {
+
+		if (this.splashCount > this.splashCycle) {
+			this.reset();
+			return;
+		}
+		++this.splashCount;
+
+		var minSplashRad = 2, maxRangeRad = 20;
+			theta = 0, 
+			dtheta = 0.1,
+			ox = Math.floor(Math.random() * this.width),
+			oy = Math.floor(Math.random() * this.height), 
+			tx = 0, ty = 0,
+			ftheta = 2 * 3.141592653589,
+			rradiusx = 0, rradiusy = 0;
+			i = 0, dx = 0, dy = 0, pos = 0,
+			clamp = function(val, max) {
+				if (val < -max) { val = -max; }
+				else if (val > max) { val = max; }
+				else if (Math.abs(val) < 0.001) { val = minSplashRad; }
+				return val;
+			};	
+
+		for (; theta < ftheta; theta += dtheta) {
+			rradiusx = minSplashRad + parseInt(Math.random() * maxRangeRad) * Math.sin(theta);
+			rradiusy = minSplashRad + parseInt(Math.random() * maxRangeRad) * Math.sin(theta);
+			rradiusx = clamp(rradiusx, maxRangeRad);
+			rradiusy = clamp(rradiusy, maxRangeRad);
+			tx = ox + parseInt(rradiusx);
+			ty = oy + parseInt(rradiusy);
+			dx = rradiusx / Math.abs(rradiusx);
+			dy = rradiusy / Math.abs(rradiusy);
+			this.drawLine(ox, oy, tx, ty, dx, dy);
+		}
+		this.texture.needsUpdate = true;
+	};
+
+	SplashMask.prototype.splash2 = function() {
+
+		if (this.splashCount > this.splashCycle) {
+			this.reset();
+			return;
+		}
+		++this.splashCount;
+
+		var x, xe = this.width,
+		 	y, ye = this.height,
+		 	ox = Math.floor(Math.random() * this.width),
+			oy = Math.floor(Math.random() * this.height), 
+			minx = ((ox - this.splatRadius) > 0 ) ? ox - this.splatRadius : 0,
+			maxx = ((ox + this.splatRadius) < this.width) ? ox + this.splatRadius : this.width,
+			miny = ((oy - this.splatRadius) > 0) ? oy - this.splatRadius : 0,
+			maxy = ((oy + this.splatRadius) < this.height) ? oy + this.splatRadius : this.height,
+		 	pos, distsq, randTol, 
+		 	radiusSq = this.splatRadius * this.splatRadius;
+		randTol =  Math.random() * this.splatRadius * this.splatRadius;
+		for (y = miny; y < maxy; ++y) {
+			for (x = minx; x < maxx; ++x) {
+				distsq = (x - ox) * (x - ox) + (y - oy) * (y - oy);
+				randTol += 4.0 * Math.random() * Math.sin(Math.random() * 10);
+				if ((distsq + randTol ) <= radiusSq ) {
+					pos = y * xe * 4 + x * 4;
+					this.data[pos] = 1.0;
+					this.data[pos+1] = 1.0;
+					this.data[pos+2] = 1.0;
+					this.data[pos+3] = 1.0;
+				}
+			}
+			randTol += 2.0 * Math.sin(10.0*Math.random());
+		}
+		this.texture.needsUpdate = true;
+	};
+
+
 	function GLCanvas(obj, width, height) {
 		var par = obj.parentNode;
 		this.scene = new THREE.Scene();
@@ -28,6 +164,7 @@ var SplashColor = (function() {
 		this.renderer.setSize(_jqParent.innerWidth(), ht);
 		par.appendChild(this.renderer.domElement);
 		this.uniforms = {};
+		this.splashMask = null;
 	}
 
 	GLCanvas.prototype.drawImage = function(image) {
@@ -37,26 +174,21 @@ var SplashColor = (function() {
 		imgTexture.needsUpdate = true;
 		imgTexture.minFilter = THREE.NearestFilter;
 
+		this.splashMask = new SplashMask(image.width, image.height, 100, 150);
 
 		var light = new THREE.AmbientLight(0xFFFFFF);
 		this.scene.add(light);
 
 		this.uniforms = {
-			time: { type: "f", value: 1.0 },
-			resolution: { type: "v2", value: new THREE.Vector2() },
 			texture: {type: "t", value: imgTexture},
-			posX: {type: 'f', value: 0.4 },
-			posY: {type: 'f', value: 0.5 },
-			radius: { type: 'f', value: 0.25 },
-			aspectRatioSq: {type: 'f', value: (image.width * image.width) / (image.height * image.height) }
+			splashMask: {type: "t", value: this.splashMask.texture}
 		};
 
 		var material =  new THREE.ShaderMaterial( {
 			uniforms: this.uniforms,
 			vertexShader: document.getElementById( 'vs0' ).textContent,
-			fragmentShader: document.getElementById( 'fs1' ).textContent
-
-		} );
+			fragmentShader: document.getElementById( 'fs3' ).textContent
+		});
 
 		var mesh = new THREE.Mesh(plane, material);
 		mesh.position.x = 0;
@@ -77,8 +209,6 @@ var SplashColor = (function() {
 		this.clock = new THREE.Clock(true);
 		this.cv = canvasCtx;
 	}
-
-	var done = 1;
 
 	AnimationFrameGen.prototype.start = function() {
 		var that = this;
@@ -119,23 +249,9 @@ var SplashColor = (function() {
 		var update = function(cv, elapsedTime, delta) {
 			_cl += 1000.0 * delta;
 			if (_cl >= 0.000005) {
-				var px = cv.uniforms.posX.value, 
-					py = cv.uniforms.posY.value;
-				px += _dirX;
-				py += _dirY;
-				var dRand = Math.random()/5.0;
-				if (px >= (0.85 + dRand)) {
-					_dirX = -0.005- Math.random()/100.0;
-				} else if (px <= (0.05 - dRand)) {
-					_dirX = 0.005+ Math.random()/100.0;
+				if (cv.splashMask) {
+					cv.splashMask.splash2();
 				}
-				if (py >= (0.85 + dRand)) {
-					_dirY = -0.005- Math.random()/100.0;
-				} else if (py <= (0.05 - dRand)) {
-					_dirY = 0.005+ Math.random()/100.0;
-				}
-				cv.uniforms.posX.value = px;
-				cv.uniforms.posY.value = py;
 				_cl = 0;
 			} 
 		},

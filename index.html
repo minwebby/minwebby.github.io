@@ -97,10 +97,7 @@
 	                    <p>Bring out your true colors in Webby FX.</p>
 	                </div>
 	                <div id="effectsColor1" class="effect-sampler">
-	                	J.
-	                </div>
-	                <div id="effectsColor2" class="effect-sampler">
-	                	J.
+	                
 	                </div>
 	            </div>
 	            <div class="row black-row">
@@ -176,6 +173,33 @@
 				gl_Position = projectionMatrix * mvPosition;
 			}
 		</script>
+		
+		<script id="vs1" type="x-shader/x-vertex">
+			uniform float time;
+			uniform float size;
+			uniform float scale;
+			uniform vec3 cameraVec;
+			varying vec4 eyeNormal;
+			varying vec4 eyePos;
+			const vec4 lightPos = vec4(1.0, 1.0, 1.0, 1.0);
+			
+			void main() {
+				gl_PointSize = 0.5; 
+
+				vec4 pos = vec4(position, 1.0);				
+				pos.x += sin( time * 10.0 )  * cos(time) * 0.2;
+				pos.z += cos( time * 10.0 + pos.y)  * 0.2;
+
+				vec4 mvPosition = modelViewMatrix * pos;
+				vec4 posit = projectionMatrix * mvPosition;
+
+				
+				gl_Position = posit;
+				eyePos = normalize(lightPos - posit);	
+				eyeNormal = normalize(viewMatrix * vec4(normal, 1.0));
+			}
+		</script>
+
 		<script id="fs0" type="x-shader/x-fragment">
 			uniform float time;
 			uniform vec2 resolution;
@@ -209,58 +233,12 @@
 				float fract = (1.0 - dist*dist*dist*dist);
 				if (dist > radius) {
 					dist -= radius;
-					fract = exp(dist * -30.0);
+					fract = exp(dist * -5.0);
 				}
 				vec3 clr = vec3(color.r * fract, color.g * fract, color.b * fract);
 				gl_FragColor = vec4( clr, 1.0 );
 			}
 		</script>
-		<script id="fs1" type="x-shader/x-fragment">
-			uniform vec2 resolution;
-			uniform sampler2D texture;
-			uniform float posX;
-			uniform float posY;
-			uniform float radius;
-			uniform float aspectRatioSq;
-			varying vec2 vUv;
-			void main( void ) {
-				vec3 color = texture2D( texture, vUv).rgb;
-				float dist = sqrt((posX - vUv.x)*(posX - vUv.x)*aspectRatioSq + (posY - vUv.y)*(posY - vUv.y));
-				float fract = (1.0 - dist*dist*dist*dist);
-				if (dist > radius) {
-					dist -= radius;
-					fract = exp(dist * -30.0);
-				}
-				vec3 clr = vec3(color.r * fract, color.g * fract, color.b * fract);
-				gl_FragColor = vec4( clr, 1.0 );
-			}
-		</script>
-		<script id="vs1" type="x-shader/x-vertex">
-			uniform float time;
-			uniform float size;
-			uniform float scale;
-			uniform vec3 cameraVec;
-			varying vec4 eyeNormal;
-			varying vec4 eyePos;
-			const vec4 lightPos = vec4(1.0, 1.0, 1.0, 1.0);
-			
-			void main() {
-				gl_PointSize = 0.5; 
-
-				vec4 pos = vec4(position, 1.0);				
-				pos.x += sin( time * 10.0 )  * cos(time) * 0.2;
-				pos.z += cos( time * 10.0 + pos.y)  * 0.2;
-
-				vec4 mvPosition = modelViewMatrix * pos;
-				vec4 posit = projectionMatrix * mvPosition;
-
-				
-				gl_Position = posit;
-				eyePos = normalize(lightPos - posit);	
-				eyeNormal = normalize(viewMatrix * vec4(normal, 1.0));
-			}
-		</script>
-		
 		<script id="fs2" type="x-shader/x-fragment">
 			uniform float time;
 			uniform float scroll;
@@ -284,6 +262,22 @@
 			}
 		</script>
 
+		<script id="fs3" type="x-shader/x-fragment">
+			uniform sampler2D texture;
+			uniform sampler2D splashMask;
+			varying vec2 vUv;
+			void main( void ) {
+				vec3 color = texture2D( texture, vUv).rgb;
+				float mask = texture2D( splashMask, vUv ).r;
+				if (mask > 0.0) {
+					gl_FragColor = vec4( color, 1.0 );
+				} else {
+					float gray = 0.3 * color.r + 0.59 * color.g + 0.11 * color.b;
+					gl_FragColor = vec4(gray, gray, gray, 1.0);
+				}
+			}
+		</script>
+
 
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -298,12 +292,14 @@
 		<script type="text/javascript" src="src/stubs/e2.js"></script>
 		<script type="text/javascript" src="src/stubs/e3.js"></script>
 		<script type="text/javascript" src="src/stubs/e4.js"></script>
+		<script type="text/javascript" src="src/stubs/e5.js"></script>
 		<script type="text/javascript">
 			function init() {
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
 				TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
 				MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/monkey.json");
 				Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
+				SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
 			}
 		</script>
 	</body>
