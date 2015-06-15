@@ -1,3 +1,10 @@
+/**
+<!---
+	If you are looking at this, you probably DO want to put these effects on your site. 
+	To let you out on a secret... this site wasn't built with Flitwick. It was hand-coded.. So look around for all the messy code you can find. Use it, if you like.
+	But if you really want to be ON the cutting edge of this stuff... Let us know by signing up.
+-->
+*/
 var Waver = (function() {
 	function _apply(effect, objectURL) {
 		var par = document.getElementById("mainHeader");

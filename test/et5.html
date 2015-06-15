@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - geometry - text</title>
+        
+	</head>
+	<body>
+
+        <div id="container" style="width: 800px; height: 400px; position: absolute;">&nbsp;</div>
+
+		<script src="/bower_components/threejs/build/three.js"></script>
+		<script src="/src/theme/fonts/comic.js"></script>
+		<script src="GeometryUtils.js"></script>
+        
+       		
+         <script id="vertexShader" type="x-shader/x-vertex">
+			uniform float tm;
+            
+            varying vec3 vertPos;
+            varying vec3 nnorm;
+            
+            const vec3 lightPos = vec3(100.0, 100.0, 100.0);
+            varying vec3 lPos;
+            
+            void main()
+			{
+                float dify = sin(tm * 10.0) * sin(position.x) * 2.0;
+                float difz = sin(tm * 5.0) * sin(position.y / 10.0) * 5.0;
+                vec3 changedPosition = position;
+                changedPosition.z += dify;
+                changedPosition.x += difz;
+                
+				vec4 mvPosition = projectionMatrix * modelViewMatrix * vec4( changedPosition, 1.0 );
+                
+                vec4 pos = modelViewMatrix * vec4(changedPosition, 1.0);
+                vertPos = vec3(pos) / pos.w;
+                
+                nnorm = normalMatrix * normal;
+                
+                lPos = lightPos;
+                
+                gl_Position = mvPosition;
+			}
+		</script>
+        
+		<script id="fragmentShader" type="x-shader/x-fragment">
+            uniform vec3 clr;
+            
+            varying vec3 vertPos;
+            varying vec3 nnorm;
+            
+            varying vec3 lPos;
+            
+			void main() {
+            
+                vec3 lightDir = normalize(lPos - vertPos);
+                vec3 viewDir = normalize( -vertPos );
+                vec3 norm2 = normalize(nnorm);
+            
+                float lambertian = max(dot(lightDir, norm2), 0.0);
+                float specular = 0.0;
+                
+                if (lambertian > 0.0) {
+                    vec3 reflectDir = reflect(-lightDir, norm2);
+                    float specAngle = max(dot(reflectDir, viewDir), 0.0);
+                    specular = pow(specAngle, 10.0);
+                }
+                
+                vec3 pclr = lambertian * clr + specular * vec3(0.8, 0.7, 0.7) + vec3(0.1, 0.1, 0.1);
+                
+                gl_FragColor = vec4(pclr, 1.0);
+            }
+		</script>
+		<!-- todo async loader for fonts -->
+       
+		
+	</body>
+    <script src="/src/stubs/e6.js"></script>
+    <script type="text/javascript">
+    window.onload = function() {
+        
+        SwimmingText.init(document.getElementById("container"));
+        SwimmingText.start();
+    };
+    </script>
+</html>

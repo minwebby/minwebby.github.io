@@ -1,7 +1,12 @@
 <!DOCTYPE html lang="en">
+<!---
+	If you are looking at this, you probably DO want to put these effects on your site. 
+	To let you out on a secret... this site wasn't built with Flitwick. It was hand-coded.. So look around for all the messy code you can find. Use it, if you like.
+	But if you really want to be ON the cutting edge of this stuff... Let us know by signing up.
+-->
 <html>
 	<head>
-		<title>MinWebby - Web Effects for Designers and the rest of us</title>
+		<title>Flitwick - Web Effects for Designers and the rest of us</title>
 		<meta name="description" content="Tool for discovering and adding special effects in web content." />
 		<meta name="keywords" content="special effects, web effects, animation, 3D effects, 3D effects" />
 		<meta charset="UTF-8" />
@@ -25,7 +30,9 @@
 	                    <span class="icon-bar"></span>
 	                    <span class="icon-bar"></span>
 	                </button>
-	                <a class="navbar-brand page-scroll" href="#page-top">Webby FX</a>
+	                <a class="navbar-brand page-scroll" href="#page-top">
+	                	<img src="src/theme/img/fw1.png" height="30px" />
+	                	</a>
 	            </div>
 	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	                <ul class="nav navbar-nav navbar-right">
@@ -51,7 +58,7 @@
 	            <div class="header-content-inner">
 	                <h1 class="title-text">Special Effects for the Web sans Coding</h1>
 	                <hr>
-	                <p>Your magical design skills and Webby can add that extra zing to your web projects.</p>
+	                <p>Your magical design skills and Flitwick can add that extra zing to your web projects.</p>
 	                <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
 	            </div>
 	        </div>
@@ -60,7 +67,14 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
-	                    <h2 class="section-heading">Presenting Webby FX</h2>
+	                    <h2 class="section-heading">Presenting Flitwick</h2>
+	                    <iframe scrolling="no" 
+	                    		allowTransparency="true"
+	                    		frameborder="0"
+	                    		width="800"
+	                    		height="516"
+	                    src="http://goanimate.com/player/embed/0DWVy9bAL2Zk?utm_source=social&utm_medium=tumblr&utm_campaign=usercontent">
+	                	</iframe>
 	                    <hr class="light">
 	                    <a href="#" class="btn btn-primary btn-xl">Coming soon</a>
 	                </div>
@@ -84,7 +98,7 @@
 	                	<!-- <hr/>
 	                    <h2 class="section-heading">Light</h2>
 	                    <hr/> -->
-	                    <p>Light is what lets you see. Play with lights in Webby FX and create magic.</p>
+	                    <p>Light is what lets you see. Play with lights in Flitwick and create magic.</p>
 	                </div>
 	                <div id="effectsSampler" class="effect-sampler">
 	                </div>
@@ -94,7 +108,7 @@
 	                	<hr/>
 	                    <h2 class="section-heading">Color</h2>
 	                    <hr/>
-	                    <p>Bring out your true colors in Webby FX.</p>
+	                    <p>Bring out your true colors in Flitwick.</p>
 	                </div>
 	                <div id="effectsColor1" class="effect-sampler">
 	                
@@ -105,13 +119,9 @@
 	                	<hr/>
 	                    <h2 class="section-heading">Text</h2>
 	                    <hr/>
-	                    <p>Make the written word dance to your tunes with Webby FX.</p>
+	                    <p>Make the written word dance to your tunes with Flitwick.</p>
 	                </div>
 	                <div id="effectsText1" class="effect-sampler">
-	                	J.
-	                </div>
-	                <div id="effectsText2" class="effect-sampler">
-	                	J.
 	                </div>
 	            </div>
 	             <div class="row black-row">
@@ -119,13 +129,9 @@
 	                	<hr/>
 	                    <h2 class="section-heading">3D Objects</h2>
 	                    <hr/>
-	                    <p>Webby FX helps your users experience your full 360 imagination.</p>
+	                    <p>Flitwick helps your users experience your full 360 imagination.</p>
 	                </div>
-	                <div id="effectsText1" class="effect-sampler">
-	                	J.
-	                </div>
-	                <div id="effectsText2" class="effect-sampler">
-	                	J.
+	                <div id="effects3D" class="effect-sampler">
 	                </div>
 	                <br/>
 	            </div>
@@ -156,7 +162,7 @@
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
 	                    <h2 class="section-heading">Let's Get In Touch!</h2>
 	                    <hr class="primary">
-	                    <p>Ready to start using Webby for your next project? That's great! Send us an email @<a href="mailto:minwebbyfx@gmail.com">minwebbyfx@gmail.com</a> and we will get back to you as soon as possible!</p>
+	                    <p>Ready to start using Flitwick for your next project? That's great! Send us an email @<a href="mailto:minFlitwickfx@gmail.com">minFlitwickfx@gmail.com</a> and we will get back to you as soon as possible!</p>
 	                </div>
 	            </div>
 	        </div>
@@ -287,19 +293,26 @@
 		<script type="text/javascript" src="bower_components/wowjs/dist/wow.min.js"></script>
 		<script type="text/javascript" src="bower_components/jquery.easing/js/jquery.easing.min.js"></script>
 		<script type="text/javascript" src="src/theme/js/creative.js"></script>
+		<script src="/src/theme/fonts/comic.js" type="text/javascript"></script>
+		<script type="text/javascript" src="src/stubs/GeometryUtils.js"></script>
+		<script type="text/javascript" src="bower_components/threejs/examples/js/loaders/deprecated/SceneLoader.js"></script>
 		<script type="text/javascript" src="src/stubs/bg.js"></script>
 		<script type="text/javascript" src="src/stubs/e1.js"></script>
 		<script type="text/javascript" src="src/stubs/e2.js"></script>
 		<script type="text/javascript" src="src/stubs/e3.js"></script>
 		<script type="text/javascript" src="src/stubs/e4.js"></script>
 		<script type="text/javascript" src="src/stubs/e5.js"></script>
+		<script type="text/javascript" src="src/stubs/e6.js"></script>
+		<script type="text/javascript" src="src/stubs/e7.js"></script>
 		<script type="text/javascript">
 			function init() {
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
 				TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
-				MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/monkey.json");
+				// MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/monkey.json");
 				Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
 				SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
+				(new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
+				CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"))
 			}
 		</script>
 	</body>

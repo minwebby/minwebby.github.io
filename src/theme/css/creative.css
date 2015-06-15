@@ -52,7 +52,7 @@ p {
 }
 
 .bg-primary {
-    background-color: #0b8ff1;
+    background-color: black; /* #0b8ff1; */
 }
 
 .bg-dark {
@@ -485,9 +485,11 @@ h1.title-text
 }
 
 .effect-sampler {
-    width: 600px;
+    width: 900px;
     margin: auto;
     background-color: black;
+    text-align: center;
+
 }
 
 .black-row {
