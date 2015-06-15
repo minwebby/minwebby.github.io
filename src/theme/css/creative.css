@@ -502,3 +502,21 @@ h1.title-text
 .black-row * {
     background-color: rgba(0, 0, 0);
 }
+
+.white-text {
+    color: white;
+}
+
+.small-heading {
+    color:  #0b8ff1;
+    font-weight: bold;
+}
+
+#features img {
+    width: 100px;
+}
+
+.invalidEmail {
+    border-color: red;
+    border-width: 2px;
+}
