@@ -23,8 +23,8 @@ var SwimmingText = (function() {
          w = Math.max(jqParent.innerWidth(), 500),
          h = Math.max(jqParent.innerHeight(), 200);
 
-        camera = new THREE.PerspectiveCamera(45, w / h, 0.001, 15000);
-        camera.position.set(0, 0, 800);
+        camera = new THREE.PerspectiveCamera(60, w / h, 0.001, 15000);
+        camera.position.set(0, 0, 340);
         cameraTarget = new THREE.Vector3(0, 0, 100);
 
         scene = new THREE.Scene();

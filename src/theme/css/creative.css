@@ -596,3 +596,64 @@ h1.title-text
 .invisible {
     display: none;
 }
+
+canvas {
+    border-radius: 5px;
+}
+
+.tile-row-container2 {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    float: right;
+    right: -80%;
+    padding-top: 60px;
+}
+
+.basic-tile2 {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    width: 100px;
+    height: 150px;
+    margin: 10px;
+    background-image: url('/src/theme/img/sprites3.png');
+    cursor: pointer
+}
+
+#tileLight {
+    background-position: -10px 0px;
+}
+#tileLight:hover {
+    background-position: -100px 0px;
+}
+
+#tileColor {
+    background-position: -200px 0px;
+}
+#tileColor:hover {
+    background-position: -300px 0px;
+}
+
+#tileShape {
+    background-position: -385px 0px;
+}
+
+#tileShape:hover {
+    background-position: -475px 0px;
+}
+
+#tileCamera {
+    background-position: -575px 20px;
+}
+
+#tileCamera:hover {
+    background-position: -685px 20px;
+}
+
+#tileMore  {
+    background-position: 0px 20px;
+}
+
+#tileMore:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
