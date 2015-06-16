@@ -15,7 +15,7 @@ var CarBox = (function() {
 		_jqParent = $(_parent);
 
 		var w = _jqParent.width(), h =  _jqParent.height();
-		effect.setTarget(objectURL, _parent, 1000, 600);
+		effect.setTarget(objectURL, _parent, 500, 300);
 		effect.start();
 	}
 
