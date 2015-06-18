@@ -16,8 +16,8 @@ var Waver = (function() {
 			effect.start();
 		});
 		img.style.position = "absolute";
-		img.width = window.innerWidth;
-		img.height = window.innerHeight;
+		img.width = $(window).width();
+		img.height = (document.documentElement) ? document.documentElement.offsetHeight : window.innerHeight;
 		img.style.left = "0px";
 		img.style.top = "0px";
 		img.src = objectURL;
