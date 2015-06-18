@@ -603,6 +603,10 @@ h1.title-text
     display: none;
 }
 
+.justInvisible {
+    visibility: hidden;
+}
+
 canvas {
     border-radius: 5px;
 }

@@ -17,7 +17,8 @@ var MonkeyScroll = (function() {
 		var par = obj;
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(30, width/height, 0.00001, 10000);
-		this.camera.position.z = 3.0;
+		this.camera.position.z = 2.0;
+		this.camera.rotation.x = 0.1;
 		this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias:true });
 		this.renderer.setSize(width, height);
 		par.appendChild(this.renderer.domElement);
@@ -163,7 +164,7 @@ var MonkeyScroll = (function() {
 		} else {
 			$(this.container).removeClass("invisible");
 		}
-		this.glCanvas.doRotate = false;
+		// this.glCanvas.doRotate = false;
 		// this.animTask = setTimeout(fn, 0);
 	};
 
@@ -193,7 +194,7 @@ var MonkeyScroll = (function() {
 			if (_cl >= 0.000005) {
 				cv.uniforms.time.value = elapsedTime;
 				if (cv.doRotate) {
-					cv.mainObj.rotation.y += Math.sin(elapsedTime) * 0.02;
+					cv.mainObj.rotation.y += Math.sin(elapsedTime) * 0.2;
 				} else {
 					cv.mainObj.rotation.y = 0.3;
 				}
