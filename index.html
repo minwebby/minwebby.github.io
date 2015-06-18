@@ -457,13 +457,16 @@
 					jqTiles.removeClass("justInvisible");
 				});
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
-				TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
-			    MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/chonch.json");
-				Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
-				SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
-				(new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
-				CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
-				
+
+				var allOthers = function() {
+					TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
+				    MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/chonch.json");
+					Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
+					SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
+					(new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
+					CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
+				};
+				setTimeout( allOthers, 3000 );
 			}
 		</script>
 	</body>
