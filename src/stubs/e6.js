@@ -3,7 +3,7 @@ var SwimmingText = (function() {
     var container, stats, hex, color,camera, cameraTarget, scene, renderer, tm = 0,
         group, textMesh1, textGeo, material, positions = {x:[], y:[], z:[]}, 
         firstLetter = true,
-        text = "Font Mesh !",
+        text = "Shapes",
         height = 20,
         size = 70,
         hover = 30,
@@ -39,8 +39,14 @@ var SwimmingText = (function() {
         
         material = new THREE.MeshPhongMaterial({
             color: 0x505050,
-            shading: THREE.FlatShading
+            shading: THREE.FlatShading,
+            size: 10 
         }); 
+        material = new THREE.PointCloudMaterial({
+            size: 6,
+            color: 0x505050,
+            vertexColors: THREE.VertexColors
+        });
     
         _createText();
         renderer = new THREE.WebGLRenderer({antialias: false});
@@ -68,9 +74,15 @@ var SwimmingText = (function() {
             textGeo.computeBoundingBox();
             textGeo.mergeVertices();
             textGeo.computeVertexNormals();
+
+            // set initial colors
+            var i = 0, e = textGeo.vertices.length;
+            for (; i < e; ++i) {
+                textGeo.colors[i] = new THREE.Color(0.5, 0.5, 0.5)
+            }
             
             var centerOffset = -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
-            textMesh1 = new THREE.Mesh(textGeo, material);
+            textMesh1 = new THREE.PointCloud(textGeo, material);
             textMesh1.position.x = centerOffset;
             textMesh1.position.y = 0;//hover;
             textMesh1.position.z = 0;
@@ -107,13 +119,18 @@ var SwimmingText = (function() {
         var geo = textMesh1.geometry;
         var i = 0, e = geo.vertices.length;
         var xx = (geo.boundingBox.max.x - geo.boundingBox.min.x);
-        var yy = (geo.boundingBox.max.y - geo.boundingBox.min.y);
-        
-        for (; i < e; ++i) {
-            geo.vertices[i].x = positions.x[i] +  10.0 * Math.sin(tm * 50.0) * (positions.x[i] / xx) * (Math.sin(positions.y[i]/10.0)) ;
-            geo.vertices[i].y = positions.y[i] +  10.0 * Math.sin(tm * 50.0) * (positions.y[i] / yy) * (Math.sin(positions.x[i]/10.0)) ;
+        var cx = geo.boundingBox.min.x + 0.5 * xx;
+        var tmSin = 250.0 * Math.sin(tm * 10.0);
+        var t = 0;
+
+        if (Math.abs(tmSin) > 30) {
+            t = (tmSin > 0) ? tmSin - 30 : tmSin + 30;
+            for (; i < e; ++i) {
+                geo.vertices[i].x = positions.x[i] +  t * ((positions.x[i] - cx) / xx) * (Math.sin(positions.y[i]/20.0)) ;
+                geo.vertices[i].z = positions.z[i] +  0.5 * t * Math.cos((positions.x[i] / xx) * 510.0) ;
+            }
         }
-        
+
         textGeo.verticesNeedUpdate = true;
         renderer.render(scene, camera);
     }

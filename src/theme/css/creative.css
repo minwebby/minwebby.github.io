@@ -526,13 +526,13 @@ h1.title-text
   font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
   margin: auto;
   text-align: center;
-  font-size: 10px;
+ 
   width: 100%;
 }
 
 .tile-title {
     font-size: 16px;
-    font-weight: normal;
+    font-weight: bold;
     font-variant: normal;
     padding-top: 4px;
 }
@@ -544,7 +544,6 @@ h1.title-text
     height: 150px;
     margin: 10px;
     display: inline-block;
-    background-image: url("/src/theme/img/sprites1.png");
     background-repeat: no-repeat no-repeat;
 }
 
@@ -559,7 +558,7 @@ h1.title-text
 }
 
 .basic-tile .text {
-    text-align: left;
+    text-align: center;
     padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
