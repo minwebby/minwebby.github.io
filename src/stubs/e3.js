@@ -53,9 +53,11 @@ var Banner = (function() {
 	    this.sprite2.scale.set(50, 50, 50);
 	    this.scene.add( this.sprite2 );
 
-	    this.renderer = new THREE.WebGLRenderer( { alpha: true } );
+	    this.renderer = new THREE.WebGLRenderer( { alpha: true, antialias: true } );
 	    this.renderer.setPixelRatio( window.devicePixelRatio );
 	    this.renderer.setSize( width, height );
+
+	    par.style.height = height + "px";
 	        
 	    par.appendChild(this.renderer.domElement);
     }
@@ -63,7 +65,7 @@ var Banner = (function() {
     
 
 	GLCanvas.prototype.drawImage = function(image) {
-		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); 
+		 var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); 
 
 		var imgTexture = new THREE.Texture(image);
 		imgTexture.needsUpdate = true;
@@ -72,12 +74,12 @@ var Banner = (function() {
         var light = new THREE.AmbientLight(0xFFFFFF);
 		this.scene.add(light);
 
-        var material = new THREE.MeshPhongMaterial( { color: 0x777777 , map: imgTexture,} );
+ 		var material = new THREE.MeshPhongMaterial( { color: 0x777777, map: imgTexture } );
 
 		this.mesh = new THREE.Mesh(plane, material);
 		this.mesh.position.set( 0, 0, 0);
               
-        this.box = new THREE.Box3().setFromObject( this.mesh );
+  		this.box = new THREE.Box3().setFromObject(this.mesh);
         var planeheight = this.box.max.y - this.box.min.y ;
         var planewidth = this.box.max.x - this.box.min.x ;
         var scalefactor = (-(0.225 * planeheight) / planewidth ) + .3; 

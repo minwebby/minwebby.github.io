@@ -148,9 +148,13 @@ var CarBox = (function() {
 	};
 
 	_CarBoxEffect.prototype.start = function() {
+		var dt = 0;
 		var update = function(cv, elapsedTime, delta) {
-			cv.camera.position.x = 600.0 * Math.cos(elapsedTime);
-			cv.camera.position.z = 600.0 * Math.sin(elapsedTime);
+			var st = Math.sin(elapsedTime), ct = Math.cos(elapsedTime);
+			var t = (600.0 + 200 * st + 200 * ct) + dt;
+			dt += 20 * st * ct;
+			cv.camera.position.x = t * Math.cos(elapsedTime);
+			cv.camera.position.z = t * Math.sin(elapsedTime);
 			cv.camera.lookAt(new THREE.Vector3(0,-150,-50));
 		},
 		render = function(cv, elapsedTime, delta) {

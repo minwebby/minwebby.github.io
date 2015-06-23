@@ -24,7 +24,7 @@ var SwimmingText = (function() {
          h = Math.max(jqParent.innerHeight(), 200);
 
         camera = new THREE.PerspectiveCamera(60, w / h, 0.001, 15000);
-        camera.position.set(0, 0, 340);
+        camera.position.set(0, 0, 400);
         cameraTarget = new THREE.Vector3(0, 0, 100);
 
         scene = new THREE.Scene();
@@ -37,13 +37,13 @@ var SwimmingText = (function() {
         pointLight.position.set(0, 100, 90);
         scene.add(pointLight);
         
-        material = new THREE.MeshPhongMaterial({
-            color: 0x505050,
-            shading: THREE.FlatShading,
-            size: 10 
-        }); 
+        // material = new THREE.MeshPhongMaterial({
+        //     color: 0x505050,
+        //     shading: THREE.FlatShading,
+        //     size: 10 
+        // }); 
         material = new THREE.PointCloudMaterial({
-            size: 6,
+            size: 2,
             color: 0x505050,
             vertexColors: THREE.VertexColors
         });
@@ -120,17 +120,22 @@ var SwimmingText = (function() {
         var i = 0, e = geo.vertices.length;
         var xx = (geo.boundingBox.max.x - geo.boundingBox.min.x);
         var cx = geo.boundingBox.min.x + 0.5 * xx;
-        var tmSin = 250.0 * Math.sin(tm * 10.0);
-        var t = 0;
+        var tmSin = 600.0 * Math.sin(tm * 10.0);
+        var t = 0, sint = 0, cost = 0;
 
-        if (Math.abs(tmSin) > 30) {
-            t = (tmSin > 0) ? tmSin - 30 : tmSin + 30;
+        if (Math.abs(tmSin) > 70) {
+            t = (tmSin > 0) ? tmSin - 70 : tmSin + 70;
             for (; i < e; ++i) {
-                geo.vertices[i].x = positions.x[i] +  t * ((positions.x[i] - cx) / xx) * (Math.sin(positions.y[i]/20.0)) ;
+                geo.vertices[i].x = positions.x[i] +  t * ((positions.x[i] - cx) / xx) * (Math.sin(positions.y[i]/10.0)) ;
                 geo.vertices[i].z = positions.z[i] +  0.5 * t * Math.cos((positions.x[i] / xx) * 510.0) ;
+                sint = Math.sin(geo.vertices[i].z);
+                cost = Math.cos(geo.vertices[i].z); 
+                geo.colors[i] = new THREE.Color(sint*sint + 0.5, cost*cost + 0.5, sint*cost + 0.5);
             }
         }
-
+        textMesh1.material.size +=  0.05 * Math.sin(tm * 10.0);
+        
+        textGeo.colorsNeedUpdate = true;
         textGeo.verticesNeedUpdate = true;
         renderer.render(scene, camera);
     }

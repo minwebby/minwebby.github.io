@@ -16,25 +16,29 @@ var TorchLight = (function() {
 		img.addEventListener("load", function() {
 			effect.setTarget(img);
 			effect.setForever();
-			_parent.removeChild(img);
+			//_parent.removeChild(img);
 			effect.start();
 		});
 		img.style.position = "absolute";
 		img.width = _jqParent.innerWidth();
 		//img.height = _jqParent.innerHeight();
+		img.style.left = "0px";
 		img.src = objectURL;
 	}
 
 	function GLCanvas(obj, width, height) {
 		var par = obj.parentNode;
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0, 1000 );
-		this.camera.position.z = 0;
-		this.renderer = new THREE.WebGLRenderer();
+		this.camera = new THREE.PerspectiveCamera(75, obj.width/obj.height, 0.01, 15000 );
+		// new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0, 1000 );
+		this.camera.position.z = 400.0;
+		this.renderer = new THREE.WebGLRenderer({alpha: true});
 		var ht = obj.height * _jqParent.innerWidth() / obj.width;
 		this.renderer.setSize(_jqParent.innerWidth(), ht);
+		this.renderer.setClearColor( 0x000000, 0 );
 		par.appendChild(this.renderer.domElement);
 		this.uniforms = {};
+		this.mesh = null;
 	}
 
 	GLCanvas.prototype.drawImage = function(image) {
@@ -65,13 +69,16 @@ var TorchLight = (function() {
 
 		} );
 
-		var mesh = new THREE.Mesh(plane, material);
-		mesh.position.x = 0;
-		mesh.position.y = 0;
-		mesh.position.z = 0;
-		this.scene.add(mesh);
+		this.mesh = new THREE.Mesh(plane, material);
+		this.mesh.position.x = 0;
+		this.mesh.position.y = 0;
+		this.mesh.position.z = -10;
+		this.mesh.rotation.set(0.1, -0.9, 0);
+		this.scene.add(this.mesh);
 
 		this.renderer.render(this.scene, this.camera);
+		this.renderer.domElement.style.position = "absolute";
+		this.renderer.domElement.style.left = "0px";
 	};
 
 	GLCanvas.prototype.render = function() {
@@ -112,7 +119,7 @@ var TorchLight = (function() {
 		this.targetImg = target;
 		this.glCanvas = new GLCanvas(target);
 		this.glCanvas.drawImage(target);
-		target.style.display = "none";
+		// target.style.display = "none";
 	};
 
 	_TorchLightEffect.prototype.setForever = function() {
@@ -123,6 +130,7 @@ var TorchLight = (function() {
 		var _cl = 0;
 		var _dirX = 0.005;
 		var _dirY = 0.005;
+		var dt = 0.005;
 		var update = function(cv, elapsedTime, delta) {
 			_cl += 1000.0 * delta;
 			if (_cl >= 0.000005) {
@@ -144,6 +152,11 @@ var TorchLight = (function() {
 				cv.uniforms.posX.value = px;
 				cv.uniforms.posY.value = py;
 				_cl = 0;
+
+				if (cv.mesh.rotation.y > 1.0 || cv.mesh.rotation.y < -1.0) {
+					dt = -dt;
+				}
+				cv.mesh.rotation.y += dt;
 			} 
 		},
 		render = function(cv, elapsedTime, delta) {

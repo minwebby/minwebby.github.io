@@ -12,17 +12,25 @@ var SplashColor = (function() {
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
-		var img = _parent.appendChild(document.createElement("img"));
-		img.addEventListener("load", function() {
-			effect.setTarget(img);
-			effect.setForever();
-			_parent.removeChild(img);
-			effect.start();
+
+		var noiseTexture = _parent.appendChild(document.createElement("img"));
+		noiseTexture.addEventListener("load", function() {
+			var img = _parent.appendChild(document.createElement("img"));
+			img.addEventListener("load", function() {
+				effect.setTarget(img, noiseTexture);
+				effect.setForever();
+				_parent.removeChild(img);
+				_parent.removeChild(noiseTexture);
+				effect.start();
+			});
+			img.style.position = "absolute";
+			img.width = _jqParent.innerWidth();
+			img.height = _jqParent.height();
+			//img.height = _jqParent.innerHeight();
+			img.src = objectURL;
 		});
-		img.style.position = "absolute";
-		img.width = _jqParent.innerWidth();
-		//img.height = _jqParent.innerHeight();
-		img.src = objectURL;
+		noiseTexture.src = "/src/theme/img/noise.png";
+		
 	}
 
 	function SplashMask(width, height, splashCycleCount, splatRadius) 
@@ -86,49 +94,11 @@ var SplashColor = (function() {
 		}
 	};
 
-	SplashMask.prototype.splash = function() {
-
-		if (this.splashCount > this.splashCycle) {
-			this.reset();
-			return;
-		}
-		++this.splashCount;
-
-		var minSplashRad = 2, maxRangeRad = 20;
-			theta = 0, 
-			dtheta = 0.1,
-			ox = Math.floor(Math.random() * this.width),
-			oy = Math.floor(Math.random() * this.height), 
-			tx = 0, ty = 0,
-			ftheta = 2 * 3.141592653589,
-			rradiusx = 0, rradiusy = 0;
-			i = 0, dx = 0, dy = 0, pos = 0,
-			clamp = function(val, max) {
-				if (val < -max) { val = -max; }
-				else if (val > max) { val = max; }
-				else if (Math.abs(val) < 0.001) { val = minSplashRad; }
-				return val;
-			};	
-
-		for (; theta < ftheta; theta += dtheta) {
-			rradiusx = minSplashRad + parseInt(Math.random() * maxRangeRad) * Math.sin(theta);
-			rradiusy = minSplashRad + parseInt(Math.random() * maxRangeRad) * Math.sin(theta);
-			rradiusx = clamp(rradiusx, maxRangeRad);
-			rradiusy = clamp(rradiusy, maxRangeRad);
-			tx = ox + parseInt(rradiusx);
-			ty = oy + parseInt(rradiusy);
-			dx = rradiusx / Math.abs(rradiusx);
-			dy = rradiusy / Math.abs(rradiusy);
-			this.drawLine(ox, oy, tx, ty, dx, dy);
-		}
-		this.texture.needsUpdate = true;
-	};
-
 	SplashMask.prototype.splash2 = function() {
 
 		if (this.splashCount > this.splashCycle) {
 			this.reset();
-			return;
+			return undefined;
 		}
 		++this.splashCount;
 
@@ -158,10 +128,11 @@ var SplashColor = (function() {
 			randTol += 2.0 * Math.sin(10.0*Math.random());
 		}
 		this.texture.needsUpdate = true;
+		return {x: ox / this.width, y: oy / this.height};
 	};
 
 
-	function GLCanvas(obj, width, height) {
+	function GLCanvas(obj) {
 		var par = obj.parentNode;
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0, 1000 );
@@ -174,12 +145,16 @@ var SplashColor = (function() {
 		this.splashMask = null;
 	}
 
-	GLCanvas.prototype.drawImage = function(image) {
-		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); //image.width, image.height);
+	GLCanvas.prototype.drawImage = function(image, noiseImage) {
+		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); 
 
 		var imgTexture = new THREE.Texture(image);
 		imgTexture.needsUpdate = true;
 		imgTexture.minFilter = THREE.NearestFilter;
+
+		var noiseTx = new THREE.Texture(noiseImage);
+		noiseTx.needsUpdate = true;
+		noiseTx.minFilter = THREE.NearestFilter;
 
 		this.splashMask = new SplashMask(image.width, image.height, 100, 150);
 
@@ -188,7 +163,10 @@ var SplashColor = (function() {
 
 		this.uniforms = {
 			texture: {type: "t", value: imgTexture},
-			splashMask: {type: "t", value: this.splashMask.texture}
+			noiseTexture: {type: "t", value: noiseTx},
+			splashMask: {type: "t", value: this.splashMask.texture},
+			centerX: {type: 'f', value: 0.0},
+			centerY: {type: 'f', value: 0.0}
 		};
 
 		var material =  new THREE.ShaderMaterial( {
@@ -238,11 +216,12 @@ var SplashColor = (function() {
 		this.animFrame = null;
 	}
 
-	_SplashColorEffect.prototype.setTarget = function(target) {
+	_SplashColorEffect.prototype.setTarget = function(target, noiseImage) {
 		this.targetImg = target;
 		this.glCanvas = new GLCanvas(target);
-		this.glCanvas.drawImage(target);
+		this.glCanvas.drawImage(target, noiseImage);
 		target.style.display = "none";
+		noiseImage.style.display = "none";
 	};
 
 	_SplashColorEffect.prototype.setForever = function() {
@@ -254,10 +233,14 @@ var SplashColor = (function() {
 		var _dirX = 0.005;
 		var _dirY = 0.005;
 		var update = function(cv, elapsedTime, delta) {
-			_cl += 1000.0 * delta;
-			if (_cl >= 0.000005) {
+			_cl += 2.0 * delta;
+			if (_cl >= 0.0005) {
 				if (cv.splashMask) {
-					cv.splashMask.splash2();
+					var center = cv.splashMask.splash2();
+					if (center) {
+						cv.uniforms.centerX.value = center.x;
+						cv.uniforms.centerY.value = center.y;
+					}
 				}
 				_cl = 0;
 			} 

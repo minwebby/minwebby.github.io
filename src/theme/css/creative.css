@@ -487,10 +487,8 @@ h1.title-text
 
 .effect-sampler {
     width: 500px;
-    margin: auto;
-    background-color: black;
+    height: 333px;
     text-align: center;
-
 }
 
 .black-row {
@@ -538,7 +536,6 @@ h1.title-text
 }
 
 .basic-tile {
-    background-color: rgba(0, 0, 0, 0.3);
     color: #fff;
     width: 12%;
     height: 150px;
@@ -553,9 +550,6 @@ h1.title-text
     text-align: center;
 }
 
-.basic-tile:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-}
 
 .basic-tile .text {
     text-align: center;
@@ -585,8 +579,13 @@ h1.title-text
     cursor: pointer;
 }
 
-#didyouknow, #didyouknow * {
+.inputimg {
     color: #fff;
+}
+.input-img {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.1em;
 }
 
 .floater:hover {
@@ -594,8 +593,9 @@ h1.title-text
 }
 
 .img {
-    left: 0%;
-    top: 80%;
+    left: 5%;
+    top: 40%;
+    color: #fff;
 }
 
 .invisible {
@@ -606,15 +606,13 @@ h1.title-text
     visibility: hidden;
 }
 
-canvas {
-    border-radius: 5px;
-}
 
 .tile-row-container2 {
     position: absolute;
     text-align: center;
     right: 5%;
     padding-top: 60px;
+    margin-top: 60px;
 }
 
 .basic-tile2 {

@@ -60,8 +60,7 @@
 	                	<img src="src/theme/img/fw1.png"/>
 	                </h1>
 	                <p>An online tool for creating visual motion effects for the web.</p>
-	                <br/><br/><br/>
-
+	                
 	                <div class="tile-row-container">
 		                <div class="row tile-row">
 				        		<div class=" basic-tile" id="tileImg">
@@ -91,13 +90,10 @@
 
 	            </div>
 	        </div>
-	        <div class="floater" id="didyouknow">
-	        	Guess What..
-	        	<div class="floater img invisible">
-	        		The cover background on this page was made with this image:<br/>
-	        		<img src="/src/theme/img/header.jpg" width="300" />
-	        	</div>
-	        </div>
+        	<div class="floater img input-img">
+        		Created with:<br/>
+        		<img src="/src/theme/img/header.jpg" width="300" />
+        	</div>
 	         <div class="tile-row-container2">
 	         	<script type="text/javascript"> function scDown(sec) { window.scrollTo(0, $("#" + sec).position().top); }</script>
                 <div class="row tile-row">
@@ -128,59 +124,52 @@
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
 	                    <h1 class="section-heading">Play with the elements</h1>
-	                    <div>Flitwick helps you create visual motion effects by manipulating the elements of visual design.</div>
+	                    <div>Flitwick helps you create visual motion effects by manipulating the elements of visual design.<br/><br/></div>
 	                </div>
+	                <br/>
 	            </div>
 	        </div>
 	        <div class="container">
-	            <div class="row black-row" id="lightFx">
-	                <div class="col-lg-4 text-center">
-	                	<div id="effectsSampler2" class="effect-sampler" style="width: 200px;" >
-	                	</div>
-	                    <p>Light is what lets you see. Play with lights in Flitwick and create magic.</p>
-	                </div>
-	                <div class="col-lg-8 text-center">
-		                <div id="effectsSampler" class="effect-sampler">
+	            <div class="row" >
+	                <div class="col-lg-6" id="lightFx">
+	                	<div class="effect-holder">
+		                    <h2 class="section-heading">Light</h2>
+		                    <p>Light is what lets you see.</p>
 		                </div>
-		            </div>
-	            </div>
-	            <div class="row black-row" id="colorFx">
-	                <div class="col-lg-4 text-center">
-	                	<hr/>
-	                    <h2 class="section-heading">Color</h2>
-	                    <hr/>
-	                    <p>Bring out your true colors in Flitwick.</p>
-	                </div>
-	                <div class="col-lg-8 text-center">
-	                	<div id="effectsColor1" class="effect-sampler">
-	                	</div>
-	                </div>
-	                
-	            </div>
-	            <div class="row black-row" id="shapeFx">
-	                <div class="col-lg-4 text-center">
-	                	<hr/>
-	                    <h2 class="section-heading">Shape</h2>
-	                    <hr/>
-	                    <p>Make objects dance to your tunes with Flitwick.</p>
-	                </div>
-	                <div class="col-lg-8 text-center">
-		                <div id="effectsText1" class="effect-sampler">
+	                	<div id="effectsSampler" class="effect-sampler effect-holder">
 		                </div>
-		            </div>
-	            </div>
-	             <div class="row black-row" id="Fx">
-					<div class="col-lg-4 text-center">
-	                	<hr/>
-	                    <h2 class="section-heading">Cameras</h2>
-	                    <hr/>
-	                    <p>Flitwick helps your users experience your full 360 imagination.</p>
-	                </div>
-	                <div class="col-lg-8 text-center">
-	                	<div id="effects3D" class="effect-sampler">
-	                	</div>
 	            	</div>
-	                <br/>
+	            	<div class="col-lg-6" id="colorFx">
+	            		 <div class="effect-holder">
+		                	<h2 class="section-heading">Color</h2>
+		                    <p>Bring out your true colors in Flitwick.</p>
+		                </div>
+		            	<div id="effectsColor1" class="effect-sampler effect-holder">
+		                </div>
+		             </div>
+	            </div>
+	            
+	            <div class="row black-row" >
+	            	<br/>
+	            </div>
+	            
+	            <div class="row black-row" id="shapeFx">  
+	            	<div class="col-lg-6">
+	            		<div class="effect-holder">
+		                    <h2 class="section-heading">Shape</h2>
+		                    <p>Make objects dance to your tunes with Flitwick.</p>
+		                </div>
+		            	<div id="effectsText1" class="effect-sampler">
+			            </div>
+		            </div>
+		            <div class="col-lg-6">
+	            		<div class="effect-holder">
+		                    <h2 class="section-heading">Cameras</h2>
+		                    <p>Flitwick helps your users experience your full 360 imagination.</p>
+		                </div>
+		                <div id="effects3D" class="effect-sampler">
+		                </div>
+	            	</div>
 	            </div>
 
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -380,7 +369,7 @@
 				float fract = (1.0 - dist*dist*dist*dist);
 				if (dist > radius) {
 					dist -= radius;
-					fract = exp(dist * -5.0);
+					fract = exp(dist * -2.0);
 				}
 				vec3 clr = vec3(color.r * fract, color.g * fract, color.b * fract);
 				gl_FragColor = vec4( clr, 1.0 );
@@ -412,12 +401,32 @@
 		<script id="fs3" type="x-shader/x-fragment">
 			uniform sampler2D texture;
 			uniform sampler2D splashMask;
+			uniform sampler2D noiseTexture;
+			uniform float centerX;
+			uniform float centerY;
 			varying vec2 vUv;
 			void main( void ) {
 				vec3 color = texture2D( texture, vUv).rgb;
 				float mask = texture2D( splashMask, vUv ).r;
-				if (mask > 0.0) {
-					gl_FragColor = vec4( color, 1.0 );
+				float randomNum = texture2D(noiseTexture, vUv).r;
+
+				float jx = vUv.x - centerX;
+				float xFactor = jx * jx * jx * jx * jx * jx * jx;
+				float jy = vUv.y - centerY;
+				float yFactor = jy * jy * jy * jy * jy;
+				float dist = sqrt(jx*jx*2.7 + jy*jy);
+				float thresh = 0.2 + 0.4 * sin(randomNum);
+				
+				if (dist < thresh) {
+					
+					float xx = vUv.x + xFactor;
+					float yy = vUv.y + yFactor;
+
+					vec3 clr = color;
+					if (xx >= 0.0 && xx <= 1.0 && yy >= 0.0 && yy <= 1.0) {
+						clr = texture2D(texture, vec2(xx, yy)).rgb;
+					}
+					gl_FragColor = vec4( clr, 1.0 );
 				} else {
 					float gray = 0.3 * color.r + 0.59 * color.g + 0.11 * color.b;
 					gl_FragColor = vec4(gray, gray, gray, 1.0);
@@ -447,22 +456,11 @@
 		<script type="text/javascript" src="src/stubs/e7.js"></script>
 		<script type="text/javascript">
 			function init() {
-				var jqKnow = $(".floater.img");
-				var jqTiles = $(".tile-row-container, .tile-row-container2");
-				$("#didyouknow").hover(function() {
-					 jqKnow.removeClass("invisible");
-					 jqTiles.addClass("justInvisible");
-				}, function() { 
-					jqKnow.addClass("invisible"); 
-					jqTiles.removeClass("justInvisible");
-				});
-				
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
-
 				var allOthers = function() {
 					TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
 				    MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/chonch.json");
-					Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
+					//Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
 					SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
 					(new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
 					CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
