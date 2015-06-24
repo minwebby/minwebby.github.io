@@ -59,141 +59,159 @@
 	                <h1 class="title-text">
 	                	<img src="src/theme/img/fw1.png"/>
 	                </h1>
-	                <p>An online tool for creating visual motion effects for the web.</p>
-	                
-	                <div class="tile-row-container">
-		                <div class="row tile-row">
-				        		<div class=" basic-tile" id="tileImg">
-				        			<div class="tile-title" >Images</div>
-				        			<div class="text">Add motion effects to images. <br/></div>
-				        		</div>
-
-				        		<div class="basic-tile" id="tile3DObj">
-				        			<div class="tile-title">3D Objects</div>
-				        			<div class="text">Add 3D Objects to your web pages.</div> 
-				        		</div>
-
-				        		<div class="basic-tile" id="tileText">
-				        			<div class="tile-title">Text</div>
-				        			<div class="text">Animate (3D) text in any Web font.</div>
-				        		</div>
-
-				        		<div class="basic-tile" id="tileBg">
-				        			<div class="tile-title">Backgrounds</div>
-				        			<div class="text">Create animated backgrounds. </div>
-				        		</div>
-				        </div>
-				    </div>
-				   
-				    <br/>
-			        <a href="#about" class="btn btn-primary btn-xl page-scroll">Scroll Down to find out more</a>
-
-	            </div>
+	                <div style="font-size: 16px; font-weight: bold; padding-bottom: 20px;">An online tool for creating visual motion effects for the web.</div>
+	                <br/>
+				    <a href="#explain" class="btn page-scroll"
+				    data-toggle="tooltip" data-placement="bottom" title="Find Out More"
+				     style="transform: rotate(90deg); font-size: 40px; color: #fff;">
+				    	<span class="btm-scroll-btn">&#57472;&#57472;</span>
+				    </a>
+				</div>
 	        </div>
         	<div class="floater img input-img">
-        		Created with:<br/>
-        		<img src="/src/theme/img/header.jpg" width="300" />
+        		Make pixels come to life<br/><br/>
+        		<img src="/src/theme/img/header.jpg" width="200" />
         	</div>
-	         <div class="tile-row-container2">
-	         	<script type="text/javascript"> function scDown(sec) { window.scrollTo(0, $("#" + sec).position().top); }</script>
-                <div class="row tile-row">
-		        		<div class="basic-tile2" id="tileLight" onclick="scDown('lightFx');">
-		        			<div class="tile-title" >Lights</div>
-		        		</div>
-
-		        		<div class="basic-tile2" id="tileColor" onclick="scDown('colorFx');">
-		        			<div class="tile-title">Colors</div>
-		        		</div>
-
-		        		<div class="basic-tile2" id="tileShape" onclick="scDown('shapeFx');">
-		        			<div class="tile-title">Shape</div>
-		        		</div>
-
-		        		<div class="basic-tile2" id="tileCamera" onclick="scDown('cameraFx');">
-		        			<div class="tile-title">Camera</div>
-		        		</div>
-		        		<div class="basic-tile2" id="tileMore" style="height: 50px;"  onclick="scDown('play');">
-		        			<div class="tile-title">More..</div>
-		        		</div>
-		        </div>
-		    </div>
 	    </header>
+	    <section class="bg-primary"  id="explain">
+	    	<hr />
+	    	<div class="container text-center">
+	    		<h1 class="section-heading" style="font-size: 62.5px;">What Flitwick Lets You Do</h1>
+	    	</div>
+
+	    	<div id="explainCarousel" class="carousel slide" data-ride="carousel">
+				<!-- Indicators -->
+				
+		      	<div class="carousel-inner" role="listbox">
+			      	<div class="item active">
+			      		<div class="carousel-heading">
+			      			Add motion to all your assets
+			      		</div>
+			        	<img class="slide-img" src="/src/theme/img/sld1.png" />
+			        </div>
+					<div class="item">
+						<div class="carousel-heading">
+							Work with the elements to add beautiful visual effects
+						</div>
+						<img class="slide-img" src="/src/theme/img/sld2.png" />
+					</div>
+		        	<div class="item">
+		        		<div class="carousel-heading">
+		        			Use templates to create dazzling components
+		        		</div>
+		          		<img class="slide-img" src="/src/theme/img/sld3.png" />
+		        	</div>
+		        	<div class="item" style="text-align:center;">
+		        		<div style="width: 100% height: 20%; margin: auto; font-size: 26px; font-weight: bold; padding: 12%;">
+		        			Scroll Down to See Examples
+		        		</div>
+		        	</div>
+		      	</div>
+		      	<ol class="carousel-indicators">
+					<li data-target="#explainCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#explainCarousel" data-slide-to="1"></li>
+					<li data-target="#explainCarousel" data-slide-to="2"></li>
+					<li data-target="#explainCarousel" data-slide-to="3"></li>
+				</ol>
+				<a class="left carousel-control" href="#explainCarousel" role="button" data-slide="prev">
+					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+					<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#explainCarousel" role="button" data-slide="next">
+					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<span class="sr-only">Next</span>
+				</a>
+		    </div>
+		  </section>
 	    
-	    <section class="bg-primary" id="play">
-	    	 <div class="container">
+	    <section class="bg-primary" id="play" style="margin-top: -100px;">
+	    	<hr/>
+	    	<div class="container">
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
-	                    <h1 class="section-heading">Play with the elements</h1>
-	                    <div>Flitwick helps you create visual motion effects by manipulating the elements of visual design.<br/><br/></div>
+	                    <h1 class="section-heading">Examples</h1>
+	                    <div><br/><br/></div>
 	                </div>
 	                <br/>
 	            </div>
 	        </div>
 	        <div class="container">
 	            <div class="row" >
-	                <div class="col-lg-6" id="lightFx">
+	                <div class="col-lg-6 text-center" id="lightFx">
 	                	<div class="effect-holder">
 		                    <h2 class="section-heading">Light</h2>
 		                    <p>Light is what lets you see.</p>
 		                </div>
-	                	<div id="effectsSampler" class="effect-sampler effect-holder">
-		                </div>
+		                <div class="text-center effect-holder-outer">
+	                		<div id="effectsSampler" class="effect-sampler effect-holder" >
+		                	</div>
+		            	</div>
 	            	</div>
-	            	<div class="col-lg-6" id="colorFx">
+	            	<div class="col-lg-6 text-center" id="colorFx">
 	            		 <div class="effect-holder">
 		                	<h2 class="section-heading">Color</h2>
 		                    <p>Bring out your true colors in Flitwick.</p>
 		                </div>
-		            	<div id="effectsColor1" class="effect-sampler effect-holder">
-		                </div>
+		                <div class="text-center effect-holder-outer">
+			            	<div id="effectsColor1" class="effect-sampler effect-holder">
+			                </div>
+			            </div>
 		             </div>
 	            </div>
 	            
-	            <div class="row black-row" >
-	            	<br/>
-	            </div>
+	            <br/>
 	            
-	            <div class="row black-row" id="shapeFx">  
-	            	<div class="col-lg-6">
+	            <div class="row black-row">  
+	            	<div class="col-lg-6 text-center" id="shapeFx">
 	            		<div class="effect-holder">
 		                    <h2 class="section-heading">Shape</h2>
 		                    <p>Make objects dance to your tunes with Flitwick.</p>
 		                </div>
-		            	<div id="effectsText1" class="effect-sampler">
-			            </div>
+		                <div class="text-center effect-holder-outer">
+			            	<div id="effectsText1" class="effect-sampler effect-holder">
+				            </div>
+				        </div>
 		            </div>
-		            <div class="col-lg-6">
+		            <div class="col-lg-6 text-center" id="cameraFx">
 	            		<div class="effect-holder">
 		                    <h2 class="section-heading">Cameras</h2>
 		                    <p>Flitwick helps your users experience your full 360 imagination.</p>
 		                </div>
-		                <div id="effects3D" class="effect-sampler">
-		                </div>
+		                <div class="text-center effect-holder-outer">
+			                <div id="effects3D" class="effect-sampler effect-holder">
+			                </div>
+			            </div>
 	            	</div>
 	            </div>
-
+	            <br/>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="#contact" class="btn btn-primary btn-xl">Sign Up for Private Beta</a>
                 </div>
 	        </div>
 	    </section>
-	     <section class="bg-secondary" id="about">
+
+	     <section class="bg-primary" id="howworks"  style="margin-top: -100px;">
 	        <div class="container">
+	            <hr/>
+	    	 	<div class="row">
+	                <div class="col-lg-8 col-lg-offset-2 text-center">
+	                    <h1 class="section-heading">How it works</h1>
+	                </div>
+	            </div>
+	            <br/>
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
-	                    <h2 class="section-heading">Presenting Flitwick</h2>
-	                    <p>
-	                    Fliwick makes it easy to add amazing visual effects to your images, 3D Objects, text and background. Watch the video to understand why it makes sense.
-	                    </p>
-	                    <iframe width="800" height="450" src="https://www.youtube.com/embed/872Z-o9HRzg?showinfo=0" frameborder="0" allowfullscreen></iframe>
-	                    <hr class="light">
+	                    <iframe width="622" height="350" src="https://www.youtube.com/embed/872Z-o9HRzg?showinfo=0" frameborder="0" allowfullscreen></iframe>
+	                    <br/><br/>
 	                    <a href="#contact" class="btn btn-primary btn-xl">Sign Up for Private Beta</a>
 	                </div>
 	            </div>
 	        </div>
 	    </section>
-	     <section class="bg-primary" id="features">
+	    
+	     <section class="bg-primary" id="features"  style="margin-top: -100px;">
 	    	 <div class="container">
+	    		<hr/>
 	    	 	<div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
 	                    <h1 class="section-heading">Features</h1>
@@ -271,15 +289,14 @@
 	            	</tr>
 	            </table>
 	        </div>
-	        <br/><br/>
+	        <br/>
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="#contact" class="btn btn-primary btn-xl">Sign Up for Private Beta</a>
             </div>
 	    </section>
 
-	   
 
-	    <section id="contact">
+	    <section id="contact"  style="margin-top: -100px;">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -298,7 +315,9 @@
 	            </div>
 	        </div>
 	    </section>
-	    <div id="monkeyEffectContainer"></div>
+	    <!--
+	    	<div id="monkeyEffectContainer"></div>
+		-->
 
 
 	    <script id="vs0" type="x-shader/x-vertex">
@@ -457,9 +476,12 @@
 		<script type="text/javascript">
 			function init() {
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
+
+				 $('[data-toggle="tooltip"]').tooltip();
+
 				var allOthers = function() {
 					TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
-				    MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/chonch.json");
+				   // MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/chonch.json");
 					//Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
 					SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
 					(new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();

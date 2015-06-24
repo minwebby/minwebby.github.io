@@ -486,8 +486,8 @@ h1.title-text
 }
 
 .effect-sampler {
-    width: 500px;
-    height: 333px;
+    width: 375px;
+    height: 250px;
     text-align: center;
 }
 
@@ -593,7 +593,7 @@ h1.title-text
 }
 
 .img {
-    left: 5%;
+    left: 2%;
     top: 40%;
     color: #fff;
 }
@@ -611,8 +611,7 @@ h1.title-text
     position: absolute;
     text-align: center;
     right: 5%;
-    padding-top: 60px;
-    margin-top: 60px;
+    margin-top: 5%;
 }
 
 .basic-tile2 {
@@ -665,4 +664,35 @@ h1.title-text
 
 #features td {
     padding: 10px;
+}
+
+.slide-img {
+    width: 400px;
+    margin: auto;
+}
+.carousel-heading {
+    font-size: 26px;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+    line-height: 3.4em;
+}
+.btm-scroll-btn {
+    font-family: 'Glyphicons Halflings';
+    font-style:normal;
+    line-height: 0.2em;
+}
+.scroll-dn {
+    margin-top: 40px;
+    text-align: center;
+    width: 100%;
+}
+.effect-holder-outer {
+    width: 100%;
+    text-align: center;
+}
+
+.effect-holder {
+    position: relative;
+    margin: auto;
 }

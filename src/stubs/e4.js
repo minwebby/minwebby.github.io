@@ -37,7 +37,7 @@ var MonkeyScroll = (function() {
 			that.uniforms = {
 				time: { type: "f", value: 1.0 },
 				scroll: {type: "f", value: 0.0 },
-				color:  { type: 'c', value: new THREE.Color( 0x222222 ) },
+				color:  { type: 'c', value: new THREE.Color( 0x994422 ) },
 				size: { type: 'f', value: 5.0  },
 				scale: { type: 'f', value: 1.0 },
 				opacity: { type: 'f', value: 1.0 },

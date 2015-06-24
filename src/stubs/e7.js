@@ -15,7 +15,7 @@ var CarBox = (function() {
 		_jqParent = $(_parent);
 
 		var w = _jqParent.width(), h =  _jqParent.height();
-		effect.setTarget(objectURL, _parent, 500, 300);
+		effect.setTarget(objectURL, _parent, 375, 200);
 		effect.start();
 	}
 
@@ -150,11 +150,12 @@ var CarBox = (function() {
 	_CarBoxEffect.prototype.start = function() {
 		var dt = 0;
 		var update = function(cv, elapsedTime, delta) {
-			var st = Math.sin(elapsedTime), ct = Math.cos(elapsedTime);
-			var t = (600.0 + 200 * st + 200 * ct) + dt;
-			dt += 20 * st * ct;
-			cv.camera.position.x = t * Math.cos(elapsedTime);
-			cv.camera.position.z = t * Math.sin(elapsedTime);
+			var eTime = elapsedTime / 2.0;
+			var st = Math.sin(eTime), ct = Math.cos(eTime);
+			var t = (400.0 + 150 * st + 150 * ct) + dt;
+			dt += 5 * st * ct;
+			cv.camera.position.x = t * Math.cos(eTime);
+			cv.camera.position.z = t * Math.sin(eTime);
 			cv.camera.lookAt(new THREE.Vector3(0,-150,-50));
 		},
 		render = function(cv, elapsedTime, delta) {
