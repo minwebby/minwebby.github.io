@@ -572,7 +572,7 @@ h1.title-text
     position: absolute;
     float: left;
     top: 40%;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.2);
     color: rgb(51,51,51);
     padding: 10px;
     font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
@@ -588,9 +588,6 @@ h1.title-text
     line-height: 1.1em;
 }
 
-.floater:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-}
 
 .img {
     left: 2%;
