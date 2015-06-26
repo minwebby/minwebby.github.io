@@ -664,7 +664,7 @@ h1.title-text
 }
 
 .slide-img {
-    width: 400px;
+    width: 550px;
     margin: auto;
 }
 .carousel-heading {
@@ -692,4 +692,8 @@ h1.title-text
 .effect-holder {
     position: relative;
     margin: auto;
+}
+
+.desc {
+    color: #fff;
 }

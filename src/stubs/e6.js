@@ -29,11 +29,9 @@ var SwimmingText = (function() {
 
         scene = new THREE.Scene();
         
-        var dirLight = new THREE.DirectionalLight(0xffffff, 0.125);
-        dirLight.position.set(0, 0, 1).normalize();
-        scene.add(dirLight);
+     
         
-        var pointLight = new THREE.PointLight(0xffffff, 1.5);
+        var pointLight = new THREE.PointLight(0xffffff, 100);
         pointLight.position.set(0, 100, 90);
         scene.add(pointLight);
         
@@ -44,7 +42,7 @@ var SwimmingText = (function() {
         // }); 
         material = new THREE.PointCloudMaterial({
             size: 2,
-            color: 0x505050,
+            color: 0xffffff,
             vertexColors: THREE.VertexColors
         });
     
@@ -122,15 +120,17 @@ var SwimmingText = (function() {
         var cx = geo.boundingBox.min.x + 0.5 * xx;
         var tmSin = 600.0 * Math.sin(tm * 10.0);
         var t = 0, sint = 0, cost = 0;
+        var trand  = 0;
 
         if (Math.abs(tmSin) > 70) {
             t = (tmSin > 0) ? tmSin - 70 : tmSin + 70;
             for (; i < e; ++i) {
                 geo.vertices[i].x = positions.x[i] +  t * ((positions.x[i] - cx) / xx) * (Math.sin(positions.y[i]/10.0)) ;
                 geo.vertices[i].z = positions.z[i] +  0.5 * t * Math.cos((positions.x[i] / xx) * 510.0) ;
-                sint = Math.sin(geo.vertices[i].z);
-                cost = Math.cos(geo.vertices[i].z); 
-                geo.colors[i] = new THREE.Color(sint*sint + 0.5, cost*cost + 0.5, sint*cost + 0.5);
+                sint = Math.abs(Math.sin(geo.vertices[i].y));
+                cost = Math.abs(Math.cos(geo.vertices[i].x));
+                trand = Math.abs(Math.cos(geo.vertices[i].z)); 
+                geo.colors[i] = new THREE.Color(sint, cost, trand); // new THREE.Color(sint*sint + 0.5, cost*cost + 0.5, sint*cost + 0.5);
             }
         }
         textMesh1.material.size +=  0.05 * Math.sin(tm * 10.0);
