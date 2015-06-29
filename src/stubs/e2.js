@@ -31,7 +31,7 @@ var TorchLight = (function() {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.PerspectiveCamera(60, obj.width/obj.height, 0.01, 15000 );
 		// new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0, 1000 );
-		this.camera.position.z = 400.0;
+		this.camera.position.z = 200.0;
 		this.renderer = new THREE.WebGLRenderer({alpha: true});
 		var ht = obj.height * _jqParent.innerWidth() / obj.width;
 		this.renderer.setSize(_jqParent.innerWidth(), ht);
@@ -73,7 +73,7 @@ var TorchLight = (function() {
 		this.mesh.position.x = 0;
 		this.mesh.position.y = 0;
 		this.mesh.position.z = -10;
-		this.mesh.rotation.set(0.1, -0.9, 0);
+		//this.mesh.rotation.set(0.1, -0.9, 0);
 		this.scene.add(this.mesh);
 
 		this.renderer.render(this.scene, this.camera);
@@ -153,10 +153,10 @@ var TorchLight = (function() {
 				cv.uniforms.posY.value = py;
 				_cl = 0;
 
-				if (cv.mesh.rotation.y > 1.0 || cv.mesh.rotation.y < -1.0) {
-					dt = -dt;
-				}
-				cv.mesh.rotation.y += dt;
+				// if (cv.mesh.rotation.y > 1.0 || cv.mesh.rotation.y < -1.0) {
+				// 	dt = -dt;
+				// }
+				// cv.mesh.rotation.y += dt;
 			} 
 		},
 		render = function(cv, elapsedTime, delta) {

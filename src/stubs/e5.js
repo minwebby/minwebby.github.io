@@ -62,38 +62,6 @@ var SplashColor = (function() {
 		this.texture.needsUpdate = true;
 	};
 
-	SplashMask.prototype.drawLine = function(ox, oy, tx, ty, dx, dy) {
-		var pos, pixs = new Array(100), pc = 0;
-		if (dx > 0) {
-			if (dy > 0) {
-				while (ox < tx && oy < ty) {
-					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
-				}
-			} else {
-				while (ox < tx && oy > ty) {
-					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
-				}
-			}
-		} else {
-			if (dy > 0) {
-				while (ox > tx && oy < ty) {
-					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
-				}
-			} else {
-				while (ox > tx && oy > ty) {
-					pixs[pc++] = (oy * this.width + ox) * 4;  ox += dx; oy += dy;
-				}
-			}
-		}
-		for (var i = 0; i < pc; ++i) {
-			pos = pixs[i];
-			this.data[pos] = 1.0;
-			this.data[pos+1] = 1.0;
-			this.data[pos+2] = 1.0;
-			this.data[pos+3] = 1.0;
-		}
-	};
-
 	SplashMask.prototype.splash2 = function() {
 
 		if (this.splashCount > this.splashCycle) {
@@ -102,32 +70,8 @@ var SplashColor = (function() {
 		}
 		++this.splashCount;
 
-		var x, xe = this.width,
-		 	y, ye = this.height,
-		 	ox = Math.floor(Math.random() * this.width),
-			oy = Math.floor(Math.random() * this.height), 
-			minx = ((ox - this.splatRadius) > 0 ) ? ox - this.splatRadius : 0,
-			maxx = ((ox + this.splatRadius) < this.width) ? ox + this.splatRadius : this.width,
-			miny = ((oy - this.splatRadius) > 0) ? oy - this.splatRadius : 0,
-			maxy = ((oy + this.splatRadius) < this.height) ? oy + this.splatRadius : this.height,
-		 	pos, distsq, randTol, 
-		 	radiusSq = this.splatRadius * this.splatRadius;
-		
-		randTol =  Math.random() * this.splatRadius * this.splatRadius;
-		for (y = miny; y < maxy; ++y) {
-			for (x = minx; x < maxx; ++x) {
-				distsq = (x - ox) * (x - ox) + (y - oy) * (y - oy);
-				//randTol += 10.0 * Math.random() * Math.sin(Math.random() * 10);
-				if ((distsq + randTol ) <= radiusSq ) {
-					pos = y * xe * 4 + x * 4;
-					this.data[pos] = 1.0;
-					this.data[pos+1] = 1.0;
-					this.data[pos+2] = 1.0;
-					this.data[pos+3] = 1.0;
-				}
-			}
-			randTol += 2.0 * Math.sin(10.0*Math.random());
-		}
+		var ox = Math.floor(Math.random() * this.width),
+			oy = Math.floor(Math.random() * this.height);
 		this.texture.needsUpdate = true;
 		return {x: ox / this.width, y: oy / this.height};
 	};
@@ -235,7 +179,7 @@ var SplashColor = (function() {
 		var _dirY = 0.005;
 		var update = function(cv, elapsedTime, delta) {
 			_cl += 4.0 * delta;
-			if (_cl >= 0.0005) {
+			if (_cl >= 0.00008) {
 				if (cv.splashMask) {
 					var center = cv.splashMask.splash2();
 					if (center) {
