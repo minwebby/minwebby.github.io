@@ -29,7 +29,7 @@ var TorchLight = (function() {
 	function GLCanvas(obj, width, height) {
 		var par = obj.parentNode;
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera(75, obj.width/obj.height, 0.01, 15000 );
+		this.camera = new THREE.PerspectiveCamera(60, obj.width/obj.height, 0.01, 15000 );
 		// new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0, 1000 );
 		this.camera.position.z = 400.0;
 		this.renderer = new THREE.WebGLRenderer({alpha: true});
@@ -133,7 +133,7 @@ var TorchLight = (function() {
 		var dt = 0.005;
 		var update = function(cv, elapsedTime, delta) {
 			_cl += 1000.0 * delta;
-			if (_cl >= 0.000005) {
+			if (_cl >= 0.0000005) {
 				var px = cv.uniforms.posX.value, 
 					py = cv.uniforms.posY.value;
 				px += _dirX;

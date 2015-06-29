@@ -112,11 +112,12 @@ var SplashColor = (function() {
 			maxy = ((oy + this.splatRadius) < this.height) ? oy + this.splatRadius : this.height,
 		 	pos, distsq, randTol, 
 		 	radiusSq = this.splatRadius * this.splatRadius;
+		
 		randTol =  Math.random() * this.splatRadius * this.splatRadius;
 		for (y = miny; y < maxy; ++y) {
 			for (x = minx; x < maxx; ++x) {
 				distsq = (x - ox) * (x - ox) + (y - oy) * (y - oy);
-				randTol += 4.0 * Math.random() * Math.sin(Math.random() * 10);
+				//randTol += 10.0 * Math.random() * Math.sin(Math.random() * 10);
 				if ((distsq + randTol ) <= radiusSq ) {
 					pos = y * xe * 4 + x * 4;
 					this.data[pos] = 1.0;
@@ -233,7 +234,7 @@ var SplashColor = (function() {
 		var _dirX = 0.005;
 		var _dirY = 0.005;
 		var update = function(cv, elapsedTime, delta) {
-			_cl += 2.0 * delta;
+			_cl += 4.0 * delta;
 			if (_cl >= 0.0005) {
 				if (cv.splashMask) {
 					var center = cv.splashMask.splash2();
