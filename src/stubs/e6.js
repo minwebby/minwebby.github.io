@@ -20,8 +20,8 @@ var SwimmingText = (function() {
     function _init(parentContainer) {
 
         var jqParent = $(parentContainer),
-         w = Math.max(jqParent.innerWidth(), 375),
-         h = Math.max(jqParent.innerHeight(), 250);
+         w = 375, // Math.max(jqParent.innerWidth(), 375),
+         h = 250; //Math.max(jqParent.innerHeight(), 250);
 
         camera = new THREE.PerspectiveCamera(60, w / h, 0.001, 15000);
         camera.position.set(0, 0, 400);
