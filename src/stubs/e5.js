@@ -29,7 +29,7 @@ var SplashColor = (function() {
 			//img.height = _jqParent.innerHeight();
 			img.src = objectURL;
 		});
-		noiseTexture.src = "/src/theme/img/noise.png";
+		noiseTexture.src = "./src/theme/img/noise.png";
 		
 	}
 
