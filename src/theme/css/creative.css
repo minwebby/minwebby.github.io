@@ -55,7 +55,7 @@ p {
 }
 
 .bg-primary {
-    background-color: #111; /* #0b8ff1; */
+    background-color: #222; /* #0b8ff1; */
 }
 
 .bg-dark {
@@ -217,7 +217,7 @@ header .header-content .header-content-inner p {
 
 header .header-content .header-content-inner .subtitle {
     font-size: 16px; font-weight: bold; padding-bottom: 20px;
-    color: #444444;
+    color: #ccc;
 }
 
 @media(min-width:768px) {
@@ -491,8 +491,6 @@ h1.title-text
 }
 
 .effect-sampler {
-    width: 375px;
-    height: 250px;
     text-align: center;
 }
 
@@ -703,6 +701,7 @@ h1.title-text
 .effect-holder {
     position: relative;
     margin: auto;
+    width: 375px;
 }
 .effect-holder p {
     color: #bdbaba;
@@ -710,4 +709,21 @@ h1.title-text
 
 .desc {
     color: #bdbaba;
+}
+.large-effect-holder {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.effect-type-holder {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.product-showcase-holder {
+    background-color: rgba(128, 128, 128, 0.6);
+}
+
+.free-form-effects {
+    background-color: rgba(128, 128, 128, 0.4);
 }

@@ -15,7 +15,11 @@ var CarBox = (function() {
 		_jqParent = $(_parent);
 
 		var w = _jqParent.width(), h =  _jqParent.height();
-		effect.setTarget(objectURL, _parent, 375, 250);
+
+		w = document.documentElement ? document.documentElement.offsetWidth : $(Window).width();
+		h = document.documentElement ? document.documentElement.offsetHeight : $(Window).height();
+
+		effect.setTarget(objectURL, _parent, w, h);
 		effect.start();
 	}
 
@@ -152,7 +156,7 @@ var CarBox = (function() {
 		var update = function(cv, elapsedTime, delta) {
 			var eTime = elapsedTime / 2.0;
 			var st = Math.sin(eTime), ct = Math.cos(eTime);
-			var t = (400.0 + 150 * st + 150 * ct) + dt;
+			var t = (300.0 + 150 * st + 150 * ct) + dt;
 			dt += 5 * st * ct;
 			cv.camera.position.x = t * Math.cos(eTime);
 			cv.camera.position.z = t * Math.sin(eTime);

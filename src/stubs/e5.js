@@ -24,8 +24,8 @@ var SplashColor = (function() {
 				effect.start();
 			});
 			img.style.position = "absolute";
-			img.width = _jqParent.innerWidth();
-			img.height = _jqParent.height();
+			img.width = 375; // _jqParent.innerWidth();
+			img.height = 250; // _jqParent.height();
 			//img.height = _jqParent.innerHeight();
 			img.src = objectURL;
 		});
@@ -183,8 +183,8 @@ var SplashColor = (function() {
 				if (cv.splashMask) {
 					var center = cv.splashMask.splash2();
 					if (center) {
-						cv.uniforms.centerX.value = center.x;
-						cv.uniforms.centerY.value = center.y;
+						cv.uniforms.centerX.value += Math.sin(center.x / 10.0);
+						cv.uniforms.centerY.value += Math.sin(center.y / 10.0);
 					}
 				}
 				_cl = 0;
