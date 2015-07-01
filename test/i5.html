@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Aurora</title>
+	</head>
+	<body onload="init();">
+
+		<script type="text/javascript" src="/bower_components/threejs/build/three.js"></script>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+			varying vec2 vUv;
+			void main()
+			{
+				vUv = uv;
+				vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+				gl_Position = projectionMatrix * mvPosition;
+			}
+		</script>
+
+		<script id="fragmentShader" type="x-shader/x-fragment">
+			uniform vec2 resolution;
+			uniform sampler2D texture;
+			uniform float centerX;
+			uniform float centerY;
+			uniform float radius;
+			uniform float aspectRatioSq;
+			uniform float time;
+			varying vec2 vUv;
+			void main( void ) {
+				vec3 color = texture2D( texture, vUv).rgb;
+
+				float dist = sqrt((vUv.x)*(vUv.x)*aspectRatioSq + (vUv.y)*( vUv.y));
+				// vec3 clr = color;
+				// if(dist > radius){
+				// 	clr = vec3(dist,0.0,0.0);
+				// }
+				float sint = sin(time) ;
+
+
+				float angle = 4.0 * atan(vUv.y / vUv.x);
+				float fract = 1.0;
+				float fdist = sin(angle - 5.0 * sint) * radius * 0.05;
+				if ((dist + fdist) < radius) {
+					fract = 0.4 + 0.6 * dist * dist;
+				}
+				vec3 clr = vec3(color.r*fract, color.g*fract , color.b*fract);
+				gl_FragColor = vec4( clr, 1.0 );
+			}
+		</script>
+
+		<script type="text/javascript" src="e5.js"></script>
+		<script type="text/javascript">
+			function init() {
+				apply(new IconShine(), "/src/theme/img/psready.png");
+			}
+		</script>
+	</body>
+</html>
