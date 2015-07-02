@@ -75,44 +75,14 @@
         	</div>
 	    </header>
 	    <section class="bg-primary"  id="explain">
-	    	<div id="explainCarousel" class="carousel slide" data-ride="carousel">
-				<!-- Indicators -->
-				
-		      	<div class="carousel-inner" role="listbox">
-			      	<div class="item active">
-			      		<div class="carousel-heading taller">
-			      			Add motion to all your assets
-			      		</div>
-			        	<img class="slide-img" src="/src/theme/img/sld1.png" />
-			        </div>
-					<div class="item">
-						<div class="carousel-heading taller">
-							Work with the elements to add beautiful visual effects
-						</div>
-						<img class="slide-img" src="/src/theme/img/sld2.png" />
-					</div>
-		        	<div class="item">
-		        		<div class="carousel-heading taller">
-		        			Use templates to create dazzling components
-		        		</div>
-		          		<img class="slide-img" src="/src/theme/img/sld3.png" />
-		        	</div>
-		      	</div>
-		      	<ol class="carousel-indicators">
-					<li data-target="#explainCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#explainCarousel" data-slide-to="1"></li>
-					<li data-target="#explainCarousel" data-slide-to="2"></li>
-				</ol>
-				<a class="left carousel-control" href="#explainCarousel" role="button" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#explainCarousel" role="button" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					<span class="sr-only">Next</span>
-				</a>
-		    </div>
-		  </section>
+	    	<div class="row text-center">
+                <h2 class="carousel-heading">Carousels, Hero Units, etc.</h2>
+                <p>Make smooth, beautiful transitions in your large displays.</p>
+            </div>
+	    	<div id="carousel" class="container">
+
+    		</div>	
+		</section>
 	    
 	    <section class="bg-primary" id="play" style="margin-top: -100px;">
 	    	
@@ -625,6 +595,7 @@
 		<script type="text/javascript" src="src/stubs/e6.js"></script>
 		<script type="text/javascript" src="src/stubs/e7.js"></script>
 		<script type="text/javascript" src="src/stubs/e8.js"></script>
+		 <script type="text/javascript" src="src/stubs/e10.js"></script>
 		<script type="text/javascript">
 			function init() {
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
@@ -639,6 +610,7 @@
 					 (new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
 					 CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
 					ButtonBar.apply(new ButtonBar.effect(), document.getElementById("effectControls"));
+					(new CarouselEffect(document.getElementById("carousel"), [ "./src/theme/img/sld1.png", "./src/theme/img/sld2.png","./src/theme/img/sld3.png"]));
 				};
 				setTimeout( allOthers, 3000 );
 			}

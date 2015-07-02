@@ -16,8 +16,11 @@ var CarBox = (function() {
 
 		var w = _jqParent.width(), h =  _jqParent.height();
 
-		w = document.documentElement ? document.documentElement.offsetWidth : $(Window).width();
-		h = document.documentElement ? document.documentElement.offsetHeight : $(Window).height();
+		w = 1000; 
+		h = 700;
+
+		// w = document.documentElement ? document.documentElement.offsetWidth : $(window).width();
+		// h = document.documentElement ? document.documentElement.offsetHeight : $(window).height();
 
 		effect.setTarget(objectURL, _parent, w, h);
 		effect.start();
