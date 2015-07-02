@@ -661,9 +661,16 @@ h1.title-text
 #tileMore:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
-
-#features td {
+#play table {
+    width: 80%;
+    margin: auto;
+}
+#play td {
     padding: 10px;
+}
+#play td canvas {
+    border-radius: 7px;
+    --moz-border-radius: 7px;
 }
 
 .carousel-inner> .item > img {

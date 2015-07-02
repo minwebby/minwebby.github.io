@@ -42,7 +42,7 @@ var TorchLight = (function() {
 	}
 
 	GLCanvas.prototype.drawImage = function(image) {
-		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); //image.width, image.height);
+		var plane = new THREE.PlaneBufferGeometry(image.width, image.height, 1, 1); //image.width, image.height);
 
 		var imgTexture = new THREE.Texture(image);
 		imgTexture.needsUpdate = true;

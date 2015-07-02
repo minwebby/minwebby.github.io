@@ -91,7 +91,7 @@ var SplashColor = (function() {
 	}
 
 	GLCanvas.prototype.drawImage = function(image, noiseImage) {
-		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); 
+		var plane = new THREE.PlaneBufferGeometry(image.width, image.height, 1, 1); 
 
 		var imgTexture = new THREE.Texture(image);
 		imgTexture.needsUpdate = true;

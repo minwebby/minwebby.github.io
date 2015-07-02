@@ -46,10 +46,10 @@ var ButtonBar = (function() {
 	    };
 
 	    var geometries = [
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1),
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1),
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1),
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1)
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1),
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1),
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1),
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1)
 	    ];
 
 

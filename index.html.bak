@@ -76,7 +76,7 @@
 	    </header>
 	    <section class="bg-primary"  id="explain">
 	    	<div class="row text-center">
-                <h2 class="carousel-heading">Create Carousels, Hero Units, etc.</h2>
+                <h2 class="carousel-heading">Carousels, Hero Units, etc.</h2>
                 <p>Make smooth, beautiful transitions in your large displays.</p>
             </div>
 	    	<div id="carousel" class="container">
@@ -88,7 +88,7 @@
 	    	
 	    	 <div class="row text-center effect-type-holder product-showcase-holder" id="cameraFx">
         		<div class="row">
-                    <h2 class="carousel-heading">Create Product Showcases</h2>
+                    <h2 class="carousel-heading">Product Showcases</h2>
                     <p>Flitwick helps your users experience your full 360 imagination.</p>
                 </div>
                 <div class="row text-center">
@@ -102,7 +102,69 @@
                     <h2 class="carousel-heading">Icons, Logos and More..</h2>
                     <p>Put your images to work. Make them more engaging than ever before.</p>
                 </div>
-            	<table class="row">
+                <div class="row text-center">
+	                <div id="effectIcons" class="effect-sampler effect-holder large-effect-holder">
+	                </div>
+	            </div>
+        	</div>
+
+
+        	<div class="row text-center effect-type-holder product-showcase-holder" id="controlsFx">
+        		<div class="row">
+                    <h2 class="carousel-heading">Backgrounds</h2>
+                    <p>Create amazing animated backgrounds and controls.</p>
+                </div>
+                <div class="row text-center">
+	                <div id="effectControls" class="effect-sampler effect-holder large-effect-holder">
+	                </div>
+	            </div>
+        	</div>
+	    	
+	    	<div class="row free-form-effects effect-type-holder">
+	    		<div class="row text-center">
+                    <h2 class="carousel-heading">Freeform effects</h2>
+                    <p>You can design your own effects playing with the visual elements.</p>
+                </div>
+                <div class="col-lg-4 text-center" id="lightFx">
+                	<div class="effect-holder">
+	                    <h2 class="carousel-heading">Light</h2>
+	                    <p>Light is what lets you see.</p>
+	                </div>
+	                <div class="text-center effect-holder-outer">
+                		<div id="effectsSampler" class="effect-sampler effect-holder" >
+	                	</div>
+	            	</div>
+            	</div>
+            	<div class="col-lg-4 text-center" id="colorFx">
+            		 <div class="effect-holder">
+	                	<h2 class="carousel-heading">Color</h2>
+	                    <p>Bring out your true colors in Flitwick.</p>
+	                </div>
+	                <div class="text-center effect-holder-outer">
+		            	<div id="effectsColor1" class="effect-sampler effect-holder">
+		                </div>
+		            </div>
+	             </div>
+	             <div class="col-lg-4 text-center" id="shapeFx">
+            		<div class="effect-holder">
+	                    <h2 class="carousel-heading">Shape</h2>
+	                    <p>Make objects dance to your tunes with Flitwick.</p>
+	                </div>
+	                <div class="text-center effect-holder-outer">
+		            	<div id="effectsText1" class="effect-sampler effect-holder">
+			            </div>
+			        </div>
+	            </div>
+	        </div>
+	    </section>
+
+	     <section class="bg-primary" id="howworks">
+             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/872Z-o9HRzg?showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+        </section>
+
+	     <section class="bg-primary" id="features"  style="margin-top: -100px;">
+	    	 <div class="container">
+	    		<table class="row">
 	            	<tr class="row">
 	            		<td>
 		            		<table>
@@ -177,70 +239,7 @@
 	            		</td>
 	            	</tr>
 	            </table>
-		        <div class="row text-center">
-	                <div id="effectIcons" class="effect-sampler effect-holder large-effect-holder">
-	                </div>
-	            </div>
-        	</div>
-
-
-        	<div class="row text-center effect-type-holder product-showcase-holder" id="controlsFx">
-        		<div class="row">
-                    <h2 class="carousel-heading">Backgrounds</h2>
-                    <p>Create amazing animated backgrounds and controls.</p>
-                </div>
-                <div class="row text-center">
-	                <div id="effectControls" class="effect-sampler effect-holder large-effect-holder">
-	                </div>
-	            </div>
-        	</div>
-	    	
-	    	<div class="row free-form-effects effect-type-holder">
-	    		<div class="row text-center">
-                    <h2 class="carousel-heading">Freeform effects</h2>
-                    <p>You can design your own effects playing with the visual elements.</p>
-                </div>
-                <div class="col-lg-4 text-center" id="lightFx">
-                	<div class="effect-holder">
-	                    <h2 class="carousel-heading">Light</h2>
-	                    <p>Light is what lets you see.</p>
-	                </div>
-	                <div class="text-center effect-holder-outer">
-                		<div id="effectsSampler" class="effect-sampler effect-holder" >
-	                	</div>
-	            	</div>
-            	</div>
-            	<div class="col-lg-4 text-center" id="colorFx">
-            		 <div class="effect-holder">
-	                	<h2 class="carousel-heading">Color</h2>
-	                    <p>Bring out your true colors in Flitwick.</p>
-	                </div>
-	                <div class="text-center effect-holder-outer">
-		            	<div id="effectsColor1" class="effect-sampler effect-holder">
-		                </div>
-		            </div>
-	             </div>
-	             <div class="col-lg-4 text-center" id="shapeFx">
-            		<div class="effect-holder">
-	                    <h2 class="carousel-heading">Shape</h2>
-	                    <p>Make objects dance to your tunes with Flitwick.</p>
-	                </div>
-	                <div class="text-center effect-holder-outer">
-		            	<div id="effectsText1" class="effect-sampler effect-holder">
-			            </div>
-			        </div>
-	            </div>
 	        </div>
-	    </section>
-
-	     <section class="bg-primary text-center" id="howworks">
-             <iframe width="80%" height="80%" 
-             style="margin: auto;"
-             src="https://www.youtube.com/embed/872Z-o9HRzg?showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
-        </section>
-
-	     <section class="bg-primary" id="features"  style="margin-top: -100px;">
-	    	 
 	        <br/>
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="#contact" class="btn btn-primary btn-xl">Sign Up for Private Beta</a>
@@ -422,12 +421,18 @@
 				vec3 color = texture2D( texture, vUv).rgb;
 
 				float dist = sqrt((vUv.x-0.5)*(vUv.x-0.5)*aspectRatioSq + (vUv.y)*( vUv.y));
+				// vec3 clr = color;
+				// if(dist > radius){
+				// 	clr = vec3(dist,0.0,0.0);
+				// }
 				float sint = sin(time) ;
+
+
 				float angle = 4.0 * atan(vUv.y / vUv.x);
 				float fract = 1.0;
 				float fdist = sin(angle - 5.0 * sint) * radius * 0.05;
 				if ((dist + fdist) < radius) {
-					fract += 0.8 * dist * dist;
+					fract += 0.6 * dist * dist;
 				}
 				vec3 clr = vec3(color.r*fract, color.g*fract , color.b*fract);
 				gl_FragColor = vec4( clr, 1.0 );
@@ -642,12 +647,6 @@
 					 CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
 					ButtonBar.apply(new ButtonBar.effect(), document.getElementById("effectControls"));
 					(new CarouselEffect(document.getElementById("carousel"), [ "./src/theme/img/sld1.png", "./src/theme/img/sld2.png","./src/theme/img/sld3.png"]));
-					IconShine.apply(new IconShine.effect(), "/src/theme/img/fxtemple.png", document.getElementById("iconshine1"));
-					IconShine.apply(new IconShine.effect(), "/src/theme/img/psready.png", document.getElementById("iconshine2"));
-					IconShine.apply(new IconShine.effect(), "/src/theme/img/mobilerd.png", document.getElementById("iconshine3"));
-					IconShine.apply(new IconShine.effect(), "/src/theme/img/hltemple.png", document.getElementById("iconshine4"));
-					IconShine.apply(new IconShine.effect(), "/src/theme/img/imglib.png", document.getElementById("iconshine5"));
-					IconShine.apply(new IconShine.effect(), "/src/theme/img/expfmt.png", document.getElementById("iconshine6"));
 				};
 				setTimeout( allOthers, 3000 );
 			}

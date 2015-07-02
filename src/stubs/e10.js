@@ -9,10 +9,10 @@ var Effect = function (container, height, width) {
 
     this.container = container;
     this.width = width || 1000;
-    this.height = height || 700;
+    this.height = height || 400;
 
     this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+    this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 10000);
     this.renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha: true
