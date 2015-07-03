@@ -18,7 +18,6 @@
 		
 	</head>
 	<body id="page-top" onload="init();">		
-		
 		<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
 	        <div class="container-fluid">
 	            <div class="navbar-header">
@@ -35,19 +34,9 @@
 	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	                <ul class="nav navbar-nav navbar-right">
 	                	<li>
-	                        <a class="page-scroll" href="#explain">What</a>
-	                    </li>
-	                	<li>
-	                        <a class="page-scroll" href="#play">Examples</a>
-	                    </li>
-	                	<li>
 	                		<a class="page-scroll" href="#howworks">How it works</a>
 	                	</li>
 	                	<li>
-	                		<a class="page-scroll" href="#features">Features</a>
-	                	</li>
-	                 
-	                    <li>
 	                        <a class="page-scroll" href="#contact">Contact</a>
 	                    </li>
 	                </ul>
@@ -69,46 +58,61 @@
 				    </a>
 				</div>
 	        </div>
-        	<div class="floater img input-img">
-        		Make pixels come to life<br/><br/>
-        		<img src="/src/theme/img/header.jpg" width="300" />
-        	</div>
+	        <div class="awesome-btn-holder" id="firstHolder" data-toggle="tooltip" title="Click Me">
+	        	<button id="mkawesome1Btn" onclick="mkAwesome1();" class="btn btn-secondary btn-dark awesome-btn" ></button>
+	        </div>
 	    </header>
 	    <section class="bg-primary"  id="explain">
-	    	<div class="row text-center">
-                <h2 class="carousel-heading">Create Carousels, Hero Units, etc.</h2>
-                <p>Make smooth, beautiful transitions in your large displays.</p>
+	    	<div class="row text-center top-level-row">
+                <h2 class="carousel-heading" id="carouselHeading">What Flitwick Lets You Do</h2>
+                <p id="carouselSubHeading">Play with the elements, or use templates to create beautiful 3D animation effects.</p>
+            </div>
+            <div class="row top-level-row" id="planeCarousel">
+            	<div class="col-lg-4 text-center" >
+            		<img src="/src/theme/img/sld1.png" width="400" />
+            	</div>
+            	<div class="col-lg-4 text-center">
+            		<img src="/src/theme/img/sld2.png" width="400"/>
+            	</div>
+            	<div class="col-lg-4 text-center">
+            		<img src="/src/theme/img/sld3.png" width="400"/>
+            	</div>
             </div>
 	    	<div id="carousel" class="container">
-
-    		</div>	
+    		</div>
+    		<div class="awesome-btn-holder" id="secondHolder">
+        		<button id="mkawesome2Btn" onclick="mkAwesome2();" class="btn btn-secondary btn-dark awesome-btn" ></button>
+        	</div>
 		</section>
-	    
-	    <section class="bg-primary" id="play" style="margin-top: -100px;">
-	    	
-	    	 <div class="row text-center effect-type-holder product-showcase-holder" id="cameraFx">
-        		<div class="row">
+	    <section class="bg-primary" id="play">
+	    	<div class="row text-center effect-type-holder product-showcase-holder top-level-row" id="cameraFx">
+        		<div class="row top-level-row">
                     <h2 class="carousel-heading">Create Product Showcases</h2>
                     <p>Flitwick helps your users experience your full 360 imagination.</p>
                 </div>
-                <div class="row text-center">
+                <div class="row top-level-row text-center">
 	                <div id="effects3D" class="effect-sampler effect-holder large-effect-holder">
 	                </div>
 	            </div>
+	            <div class="awesome-btn-holder" id="thirdHolder">
+	    	 		<button id="mkawesome3Btn" onclick="mkAwesome3();" class="btn btn-secondary btn-dark awesome-btn"></button>
+	    	 	</div>
         	</div>
-
-        	<div class="row text-center effect-type-holder free-form-effects" id="iconfx">
-        		<div class="row">
-                    <h2 class="carousel-heading">Icons, Logos and More..</h2>
-                    <p>Put your images to work. Make them more engaging than ever before.</p>
+        	<div class="row top-level-rowtext-center effect-type-holder free-form-effects top-level-row" id="iconfx">
+        		<div class="row top-level-row text-center">
+                    <h2 id="logosHeading"  class="carousel-heading">Features</h2>
+                    <p id="logosSubHeading">Still not convinced. Look at the whole set of features.</p>
                 </div>
-            	<table class="row">
+            	<div class="awesome-btn-holder" id="fourthHolder">
+	    	 		<button id="mkawesome4Btn" onclick="mkAwesome4();" class="btn btn-secondary btn-dark awesome-btn"></button>
+	    	 	</div>
+            	<table class="row top-level-row">
 	            	<tr class="row">
 	            		<td>
 		            		<table>
 		            			<tr>
-		            			<td> <div id="iconshine1"></div>
-												<!-- <img src="/src/theme/img/fxtemple.png" /> </td> -->
+		            			<td> <div id="iconshine1"> <img src="/src/theme/img/fxtemple.png" class="iconImage" /> </div> </td>
+												<!--  </td> -->
 		            			<td> 	<div class="small-heading">Effect Templates</div>
 	            						<div class="desc">Choose from hundreds of effect templates. Compose them to your heart's fill.</div>
 
@@ -119,8 +123,8 @@
 	            		<td>
 	            			<table>
 		            			<tr>
-		            			<td> <div id="iconshine2"></div>
-												<!-- <img src="/src/theme/img/psready.png" /> </td> -->
+		            			<td> <div id="iconshine2"> <img src="/src/theme/img/psready.png" class="iconImage" /></div>
+												<!-- </td> -->
 		            			<td> <div class="small-heading">Photoshop Ready</div>
             					<div class="desc">Import your PSD files and play with effects on different layers.</div>
 	            				</td> 
@@ -130,9 +134,12 @@
 	            		<td>
 	            			<table>
 		            			<tr>
-		            			<td>  <div id="iconshine3"></div>
-												<!-- <img src="/src/theme/img/mobilerd.png" /> </td> -->
-		            			<td>
+		            			<td>  
+		            				<div id="iconshine3">
+		            					<img src="/src/theme/img/mobilerd.png" class="iconImage"/> 
+		            				</div> 
+		            			</td>
+								<td>
 		            				<div class="small-heading">Mobile ready</div>
             					<div class="desc">Most effects work incredibly well on mobile devices too.</div>
 	            				</tr>
@@ -143,8 +150,7 @@
 	            		<td>
 		            		<table>
 		            			<tr>
-		            			<td>  <div id="iconshine4"></div>
-												<!-- <img src="/src/theme/img/hltemple.png" /> </td> -->
+		            			<td> <div id="iconshine4"><img src="/src/theme/img/hltemple.png" class="iconImage"/> </div> </td>
 		            			<td>
 			            			<div class="small-heading">Higher Level Templates</div>
 	            					<div class="desc">Library of higher level components like product showcases, catalogs, slideshows.</div>
@@ -155,8 +161,7 @@
 	            		<td>
 	            			<table>
 		            			<tr>
-		            				<td> <div id="iconshine5"></div>
-													<!-- <img src="/src/theme/img/imglib.png" /></td> -->
+		            				<td> <div id="iconshine5"><img src="/src/theme/img/imglib.png" class="iconImage"/></div></td>
 		            				<td>
 		            					<div class="small-heading">Image Library</div>
             							<div class="desc">Huge collection of Stock Images for direct integration into your work.</div>
@@ -167,8 +172,7 @@
 	            		<td>
 	            			<table>
 		            			<tr>
-		            			<td>  <div id="iconshine6"></div>
-												<!-- <img src="/src/theme/img/expfmt.png" /> </td> -->
+		            			<td>  <div id="iconshine6"> <img src="/src/theme/img/expfmt.png" class="iconImage" /></div></td>
 		            			<td>
 			            			<div class="small-heading">Multiple Export Formats</div>
 	            					<div class="desc">Export to HTML bundle (default), video and even spritesheets.</div>
@@ -177,26 +181,26 @@
 	            		</td>
 	            	</tr>
 	            </table>
-		        <div class="row text-center">
+		        <div class="row top-level-row text-center">
 	                <div id="effectIcons" class="effect-sampler effect-holder large-effect-holder">
 	                </div>
 	            </div>
         	</div>
-
-
-        	<div class="row text-center effect-type-holder product-showcase-holder" id="controlsFx">
-        		<div class="row">
+        	<div class="row text-center effect-type-holder product-showcase-holder top-level-row" id="controlsFx">
+        		<div class="awesome-btn-holder" id="fifthHolder">
+        			<button class="btn btn-secondary btn-dark awesome-btn" onclick="mkAwesome5();"></button>
+        		</div>
+        		<div class="row top-level-row">
                     <h2 class="carousel-heading">Backgrounds</h2>
                     <p>Create amazing animated backgrounds and controls.</p>
                 </div>
-                <div class="row text-center">
+                <div class="row text-center top-level-row">
 	                <div id="effectControls" class="effect-sampler effect-holder large-effect-holder">
 	                </div>
 	            </div>
         	</div>
-	    	
-	    	<div class="row free-form-effects effect-type-holder">
-	    		<div class="row text-center">
+	    	<div class="row free-form-effects effect-type-holder top-level-row">
+	    		<div class="row text-center top-level-row">
                     <h2 class="carousel-heading">Freeform effects</h2>
                     <p>You can design your own effects playing with the visual elements.</p>
                 </div>
@@ -209,16 +213,23 @@
                 		<div id="effectsSampler" class="effect-sampler effect-holder" >
 	                	</div>
 	            	</div>
+	            	<div class="awesome-btn-holder sixthHolder" id="sixthHolder1">
+        				<button class="btn btn-secondary btn-dark awesome-btn" onclick="mkAwesome6_1();"></button>
+        			</div>
             	</div>
             	<div class="col-lg-4 text-center" id="colorFx">
-            		 <div class="effect-holder">
+            		<div class="effect-holder">
 	                	<h2 class="carousel-heading">Color</h2>
 	                    <p>Bring out your true colors in Flitwick.</p>
 	                </div>
 	                <div class="text-center effect-holder-outer">
 		            	<div id="effectsColor1" class="effect-sampler effect-holder">
+		            		<img src="/src/theme/img/tulips.jpg"  width="375" height="250" id="tulipImg"/>
 		                </div>
 		            </div>
+		             <div class="awesome-btn-holder sixthHolder" id="sixthHolder2">
+        				<button class="btn btn-secondary btn-dark awesome-btn" onclick="mkAwesome6_2();"></button>
+        			</div>
 	             </div>
 	             <div class="col-lg-4 text-center" id="shapeFx">
             		<div class="effect-holder">
@@ -227,28 +238,30 @@
 	                </div>
 	                <div class="text-center effect-holder-outer">
 		            	<div id="effectsText1" class="effect-sampler effect-holder">
+		            		<div class="comic" id="comic">
+		            			Shapes
+		            		</div>
 			            </div>
 			        </div>
+			        <div class="awesome-btn-holder sixthHolder" id="sixthHolder3">
+        				<button class="btn btn-secondary btn-dark awesome-btn" onclick="mkAwesome6_3();"></button>
+        			</div>
 	            </div>
 	        </div>
 	    </section>
-
 	     <section class="bg-primary text-center" id="howworks">
              <iframe width="80%" height="80%" 
              style="margin: auto;"
              src="https://www.youtube.com/embed/872Z-o9HRzg?showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
         </section>
-
-	     <section class="bg-primary" id="features"  style="margin-top: -100px;">
+	    <section class="bg-primary" id="features">
 	    	 
 	        <br/>
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <a href="#contact" class="btn btn-primary btn-xl">Sign Up for Private Beta</a>
             </div>
 	    </section>
-
-
-	    <section id="contact"  style="margin-top: -100px;">
+	    <section id="contact">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -257,22 +270,11 @@
 	                   
 	                    <p style="width: 320px; margin: auto; text-align: left;">Flitwick is still in the works. Leave us your contact details, and we will get back to you as soon as possible.</p>
 	                    <iframe src="http://goo.gl/forms/sD19Esg48L" width="600" height="400" style="overflow-y: hidden;" scrolling="no"></iframe>
-	                   	<!-- <p>
-	                   	 	Email Address: <input type="email" id="inputEmail" placeholder="Enter email" style="width: 40%;">
-	                   	 	&nbsp;
-	                   	 	<a href="#contact"  onclick="handleSubmit();" class="btn btn-primary btn-xl">Submit</a>
-	                   	 	<!--
-	                   	 	<input type="button" onclick="handleSubmit();" value="Submit" /> 
-	                   	</p> -->
 	                </div>
 	            </div>
 	        </div>
 	    </section>
-	    <!--
-	    	<div id="monkeyEffectContainer"></div>
-		-->
-
-
+	 
 	    <script id="vs0" type="x-shader/x-vertex">
 			varying vec2 vUv;
 			void main()
@@ -282,7 +284,6 @@
 				gl_Position = projectionMatrix * mvPosition;
 			}
 		</script>
-		
 		<script id="vs1" type="x-shader/x-vertex">
 			uniform float time;
 			uniform float size;
@@ -307,7 +308,6 @@
 				eyeNormal = normalize(viewMatrix * vec4(normal, 1.0));
 			}
 		</script>
-
 		<script id="fs0" type="x-shader/x-fragment">
 			uniform float time;
 			uniform vec2 resolution;
@@ -374,7 +374,6 @@
 			    gl_FragColor = vec4(clr, 1.0);
 			}
 		</script>
-
 		<script id="fs3" type="x-shader/x-fragment">
 			uniform sampler2D texture;
 			uniform sampler2D noiseTexture;
@@ -433,8 +432,7 @@
 				gl_FragColor = vec4( clr, 1.0 );
 			}
 		</script>
-
-		 <script id="vs_btn" type="x-shader/x-vertex">
+		<script id="vs_btn" type="x-shader/x-vertex">
 			varying vec4 eyeNormal;
 			varying vec4 eyePos;
 			varying vec2 vUv;
@@ -451,7 +449,6 @@
 				vUv = uv;
 			}
 		</script>
-
 		<script id="fs_btnPassive" type="x-shader/x-fragment">
 			uniform float time;
 			uniform float over;
@@ -489,8 +486,6 @@
 											vec3(0.1, 0.1, 0.1)), 1.0);
 			}
 		</script>
-
-
 		<script id="fs_btnHover" type="x-shader/x-fragment">
 			uniform float time;
 			uniform float over;
@@ -525,10 +520,7 @@
 											vec3(0.4, 0.4, 0.2),
 											vec3(0.2, 0.2, 0.2)), 1.0);
 			}
-
 		</script>
-
-
 		<script id="fs_btnActive" type="x-shader/x-fragment">
 			uniform float time;
 			uniform float over;
@@ -565,9 +557,7 @@
 											vec3(0.8, 0.2, 0.2),
 											vec3(0.2, 0.2, 0.2)), 1.0);
 			}
-
 		</script>
-
 		<script id="fs_btnDisabled" type="x-shader/x-fragment">
 			uniform float time;
 			uniform float over;
@@ -602,9 +592,7 @@
 											vec3(0.8, 0.8, 0.8),
 											vec3(0.2, 0.2, 0.2)), 1.0);
 			}
-
 		</script>
-		
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="bower_components/threejs/build/three.js"></script>
@@ -628,20 +616,49 @@
 		<script type="text/javascript" src="src/stubs/e9.js"></script>
 		 <script type="text/javascript" src="src/stubs/e10.js"></script>
 		<script type="text/javascript">
+
+			function startScroll(id) {
+				$("#" + id).addClass("rolling");
+				setTimeout(function() { $("#" + id).tooltip("show");}, 3000);
+			}
+
+
+			function setupScrollHandling() {
+				var tolerance = 40;
+				var posIdMap = [
+					{ id: "secondHolder", top:  $("#secondHolder").offset().top - 200 },
+					{ id: "thirdHolder", top: $("#thirdHolder").offset().top - 200 },
+					{ id: "fourthHolder", top: $("#fourthHolder").offset().top - 100},
+					{ id: "fifthHolder", top: $("#fifthHolder").offset().top - 100 },
+					{ cls: "sixthHolder", top: $(".sixthHolder").offset().top - 100 }
+				];
+
+				$(window).scroll(function(ev) {
+					var pos = $(ev.currentTarget).scrollTop(),
+						jqObj = null;
+					for (var i = 0, e = posIdMap.length; i < e; ++i) {
+						if (posIdMap[i].top < pos) {
+							if (!!(posIdMap[i].id)) { jqObj = $("#" + posIdMap[i].id);} 
+							else if (!!(posIdMap[i].cls)) { jqObj = $("." + posIdMap[i].cls); }
+							if (jqObj && !jqObj.hasClass("rolling")) { jqObj.addClass("rolling"); }
+						}
+					}
+				});
+			}
+
 			function init() {
+				
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
-
-				 $('[data-toggle="tooltip"]').tooltip();
-
+				$('[data-toggle="tooltip"]').tooltip();
+				startScroll("firstHolder");
+				setupScrollHandling();
+				
 				var allOthers = function() {
-					 TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
-				    // // MonkeyScroll.apply(new MonkeyScroll.effect("monkeyEffectContainer"), "/src/theme/meshes/chonch.json");
-					// // Banner.apply(new Banner.effect(), "/src/theme/img/curiosity.png", document.getElementById("effectsSampler2"));
-					 SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
-					 (new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
-					 CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
+					TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
+					SplashColor.apply(new SplashColor.effect(), "/src/theme/img/tulips.jpg", document.getElementById("effectsColor1"));
+					(new SwimmingText.effect()).init(document.getElementById("effectsText1")).start();
+					CarBox.apply(new CarBox.effect(), '/src/theme/meshes/car.json', document.getElementById("effects3D"));
 					ButtonBar.apply(new ButtonBar.effect(), document.getElementById("effectControls"));
-					(new CarouselEffect(document.getElementById("carousel"), [ "./src/theme/img/sld1.png", "./src/theme/img/sld2.png","./src/theme/img/sld3.png"]));
 					IconShine.apply(new IconShine.effect(), "/src/theme/img/fxtemple.png", document.getElementById("iconshine1"));
 					IconShine.apply(new IconShine.effect(), "/src/theme/img/psready.png", document.getElementById("iconshine2"));
 					IconShine.apply(new IconShine.effect(), "/src/theme/img/mobilerd.png", document.getElementById("iconshine3"));
@@ -651,6 +668,55 @@
 				};
 				setTimeout( allOthers, 3000 );
 			}
+
+			function mkAwesome1() {
+				Waver.mkawesome.start();
+				$("#mkawesome1Btn").hide();
+			}
+
+			function mkAwesome2() {
+				$("#planeCarousel").hide();
+				(new CarouselEffect(document.getElementById("carousel"), [ "./src/theme/img/sld1.png", "./src/theme/img/sld2.png","./src/theme/img/sld3.png"]));
+				$("#carouselSubHeading").html("Make smooth, beautiful transitions in your displays.");
+				$("#carouselHeading").html("Create Carousels, Slideshows, Marquees, etc.");
+				$("#mkawesome2Btn").hide();
+			}
+
+			function mkAwesome3() {
+				CarBox.mkawesome.start();
+				$("#mkawesome3Btn").hide();
+				$("#thirdHolder").hide();
+			}
+
+			function mkAwesome4() {
+				$("#logosHeading").html("Create Dynamic Icons, Logos and More");
+				$("#logosSubHeading").html("Put your images to work. Make them more engaging than ever before.");
+				$("#fourthHolder").hide();
+				$(".iconImage").hide();
+				IconShine.mkawesome();
+			}
+
+			function mkAwesome5() {
+				ButtonBar.mkawesome.start();
+				$("#fifthHolder").hide();
+			}
+
+			function mkAwesome6_1() {
+				$("#sixthHolder1").hide();
+				TorchLight.mkawesome.start();
+			}
+
+			function mkAwesome6_2() {
+				$("#sixthHolder2").hide();
+				$("#tulipImg").hide();
+				SplashColor.mkawesome.start();
+			}
+			function mkAwesome6_3() {
+				$("#sixthHolder3").hide();
+				$("#comic").hide();
+				SwimmingText.mkawesome();
+			}
+
 		</script>
 	</body>
 </html>

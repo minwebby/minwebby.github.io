@@ -7,21 +7,26 @@
 */
 var SplashColor = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {};
 
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
-
+		
 		var noiseTexture = _parent.appendChild(document.createElement("img"));
 		noiseTexture.addEventListener("load", function() {
 			var img = _parent.appendChild(document.createElement("img"));
 			img.addEventListener("load", function() {
-				effect.setTarget(img, noiseTexture);
-				effect.setForever();
-				_parent.removeChild(img);
-				_parent.removeChild(noiseTexture);
-				effect.start();
+				img.style.display = "none";
+				noiseTexture.style.display = "none";
+				_funcs.start = function() {
+					effect.setTarget(img, noiseTexture);
+					effect.setForever();
+					_parent.removeChild(img);
+					_parent.removeChild(noiseTexture);
+					effect.start();
+				}
 			});
 			img.style.position = "absolute";
 			img.width = 375; // _jqParent.innerWidth();
@@ -198,6 +203,7 @@ var SplashColor = (function() {
 
 	return {
 		effect: _SplashColorEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();

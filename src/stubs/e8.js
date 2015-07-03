@@ -7,13 +7,17 @@
 */
 var ButtonBar = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {};
 
 	function _apply(effect, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 		effect.setTarget(parentNode);
-		effect.start()
+		//effect.start()
+		_funcs.start = function() { 
+			effect.start(); 
+		};
 	}
 
 	function GLCanvas(obj) {
@@ -146,6 +150,7 @@ var ButtonBar = (function() {
 
 	return {
 		effect: _ButtonBarEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();

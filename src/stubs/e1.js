@@ -6,14 +6,19 @@
 -->
 */
 var Waver = (function() {
+
+	var funcs = {}; 
+
 	function _apply(effect, objectURL) {
 		var par = document.getElementById("mainHeader");
 		var img = par.insertBefore(document.createElement("img"), par.childNodes[0]);
 		img.addEventListener("load", function() {
-			effect.setTarget(img);
-			effect.setForever();
-			par.removeChild(img);
-			effect.start();
+				funcs.start = function() {
+					effect.setTarget(img);
+					effect.setForever();
+					par.removeChild(img);
+					effect.start();
+				};
 		});
 		img.style.position = "absolute";
 		img.width = (document.documentElement) ? document.documentElement.offsetWidth : $(window).width();
@@ -139,7 +144,8 @@ var Waver = (function() {
 
 	return {
 		effect: _WaverEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: funcs
 	};
 
 })();

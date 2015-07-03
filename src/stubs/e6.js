@@ -149,11 +149,17 @@ var SwimmingText = (function() {
     };
 
     _SwimmingTextEffect.prototype.start = function(cont) {
+        renderer.domElement.style.display = "none";
         setTimeout(_animate, 0);
     };
 
+    function _show() {
+        renderer.domElement.style.display = "block";
+    }
+
     return {
-        effect: _SwimmingTextEffect
+        effect: _SwimmingTextEffect,
+        mkawesome: _show
     };
 
 })();

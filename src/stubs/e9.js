@@ -1,17 +1,31 @@
 var IconShine = (function(){
 
+	var _funcs = [];
+
+	function _start() {
+		for (var i = 0, e = _funcs.length; i < e; ++i) {
+			setTimeout(_funcs[i], 0);
+		}
+	}
+
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 		var img = _parent.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
-			effect.setTarget(img);
-			effect.setForever();
-			effect.start();
+			_funcs.push( function() {
+				var d = img.height / img.width;
+				img.width = 100;
+				img.height = d * 100;
+				effect.setTarget(img);
+				effect.setForever();
+				effect.start();
+			} );
 		});
 		img.style.position = "absolute";
 		img.style.width = "100px";
 		img.src = objectURL;
+		img.style.display = "none";
 	}
 
 
@@ -34,6 +48,7 @@ var IconShine = (function(){
 		this.camera.position.z = 2000;
 		this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 		this.renderer.setSize(obj.width, obj.height);
+		console.log(obj.width + " " + obj.height);
 		this.renderer.setClearColor(0xffffff, 1);
 		par.appendChild(this.renderer.domElement);
 		this.uniforms = {};
@@ -169,7 +184,8 @@ var IconShine = (function(){
 
 	return {
 		effect: _IconShine,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _start
 	};
 
 })();

@@ -7,22 +7,25 @@
 */
 var TorchLight = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {};
 
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 		var img = _parent.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
-			effect.setTarget(img);
-			effect.setForever();
-			//_parent.removeChild(img);
-			effect.start();
+			_funcs.start = function() {
+				effect.setTarget(img);
+				effect.setForever();
+				//_parent.removeChild(img);
+				effect.start();
+			};
 		});
-		img.style.position = "absolute";
+		// img.style.position = "absolute";
 		img.width = _jqParent.innerWidth();
 		//img.height = _jqParent.innerHeight();
-		img.style.left = "0px";
+		// img.style.left = "0px";
 		img.src = objectURL;
 	}
 
@@ -167,6 +170,7 @@ var TorchLight = (function() {
 
 	return {
 		effect: _TorchLightEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();
