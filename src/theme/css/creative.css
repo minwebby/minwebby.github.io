@@ -662,7 +662,7 @@ h1.title-text
     background-color: rgba(0, 0, 0, 0.8);
 }
 #play table {
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 #play td {
@@ -769,7 +769,11 @@ h1.title-text
     color: #fff;
 }
 
-#secondHolder, #thirdHolder, #fifthHolder {
+#secondHolder {
+    top: 5%;
+}
+
+ #thirdHolder, #fifthHolder {
     top: 10%;
 }
 
