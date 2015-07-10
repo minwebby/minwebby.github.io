@@ -7,11 +7,10 @@
 */
 var Waver = (function() {
 
-	var funcs = {}; 
-
+	var funcs = {};
 	function _apply(effect, objectURL) {
-		var par = document.getElementById("mainHeader");
-		var img = par.insertBefore(document.createElement("img"), par.childNodes[0]);
+		var par = document.getElementById("bgholder");
+		var img = par.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
 				funcs.start = function() {
 					effect.setTarget(img);
@@ -20,36 +19,25 @@ var Waver = (function() {
 					effect.start();
 				};
 		});
-		img.style.position = "absolute";
+		//img.style.position = "absolute";
 		img.width = (document.documentElement) ? document.documentElement.offsetWidth : $(window).width();
 		img.height = (document.documentElement) ? document.documentElement.offsetHeight : window.innerHeight;
-		img.style.left = "0px";
-		img.style.top = "0px";
+		//img.style.left = "0px";
+		//img.style.top = "0px";
 		img.src = objectURL;
 	}
 
-	function extractImageData(obj) {
-		var par = obj.parentNode;
-		var cv = par.appendChild(document.createElement("canvas"));
-		cv.width = window.innerWidth
-		cv.height = window.innerHeight;
-		var gd = cv.getContext('2d');
-		gd.drawImage(obj, 0, 0);
-		var img = gd.getImageData(0, 0, cv.width, cv.height);
-		par.removeChild(cv);
-		return img;
-	}
-
 	function GLCanvas(obj, width, height) {
-		var par = obj.parentNode;
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0, 1000 );
 		this.camera.position.z = 0;
 		this.renderer = new THREE.WebGLRenderer();
-		this.renderer.setSize(innerWidth, innerHeight);
-		par.insertBefore(this.renderer.domElement, par.childNodes[0]);
-		this.renderer.domElement.style.position = "absolute";
-		this.renderer.domElement.style.left = "0px";
+		this.renderer.setSize(obj.width, obj.height);
+
+		var par = obj.parentNode;
+		// par.insertBefore(this.renderer.domElement, par.childNodes[0]);
+		par.appendChild(this.renderer.domElement);
+		monitorWindow.register(this.renderer, this.camera, obj.width, obj.height);
 		this.uniforms = {};
 	}
 

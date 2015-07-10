@@ -8,8 +8,8 @@
 var Effect = function (container, height, width) {
 
     this.container = container;
-    this.width = width || 1000;
-    this.height = height || 400;
+    this.width = width || 500;
+    this.height = height || 312;
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 10000);
