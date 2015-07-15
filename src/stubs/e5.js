@@ -185,7 +185,7 @@ var SplashColor = (function() {
 		var _posX = 0.5;
 		var _posY = 0.5;
 		var update = function(cv, elapsedTime, delta) {
-			_cl += 4.0 * delta;
+			_cl += 100.0 * delta;
 			if (_cl >= 0.00008) {
 				if (cv.splashMask) {
 					var center = cv.splashMask.splash2();
