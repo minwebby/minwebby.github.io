@@ -590,7 +590,11 @@ div.title-text > div.subtitle {
     left: 47vw;
 }
 
-#nv1 { top: 40%; }
+#nv1 { 
+    top: 80vh;
+    left: 47vw;
+    width: 100px;
+ }
 /*
 #nv2 { left: 40%; top: 90%; }
 #nv3 { top: 5%; left: 20%;  }
@@ -625,8 +629,8 @@ section#play {
     margin-top: 30%;
 }
 
-.top-level-row #carousel {
-    margin-top: 30%;
+#carousel {
+    top: 20vh;
 }
 
 div.tooltip-inner {
