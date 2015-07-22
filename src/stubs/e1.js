@@ -8,6 +8,7 @@
 var Waver = (function() {
 
 	var funcs = {};
+	var state = false;
 	function _apply(effect, objectURL) {
 		var par = document.getElementById("bgholder");
 		var img = par.appendChild(document.createElement("img"));
@@ -17,13 +18,14 @@ var Waver = (function() {
 					effect.setForever();
 					par.removeChild(img);
 					effect.start();
+					state = true;
 				};
+				funcs.isStarted = function() { return state; };
+				funcs.hide = function() { effect.hide(); };
+				funcs.show = function() { effect.show(); };
 		});
-		//img.style.position = "absolute";
 		img.width = (document.documentElement) ? document.documentElement.offsetWidth : $(window).width();
 		img.height = (document.documentElement) ? document.documentElement.offsetHeight : window.innerHeight;
-		//img.style.left = "0px";
-		//img.style.top = "0px";
 		img.src = objectURL;
 	}
 
@@ -128,6 +130,12 @@ var Waver = (function() {
 			cv.render();
 		};
 		(new AnimationFrameGen([update, render], this.glCanvas)).start();
+	};
+	_WaverEffect.prototype.show = function() {
+		$(this.glCanvas.renderer.domElement).show();
+	};
+	_WaverEffect.prototype.hide = function() {
+		$(this.glCanvas.renderer.domElement).hide();
 	};
 
 	return {

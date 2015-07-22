@@ -19,7 +19,7 @@
 html, body { width: 100%; height: 100%; }
 body {
     font-family: 'Merriweather', 'Helvetica Neue', 'Century Gothic', 'Times New Roman', serif;
-    background-color: #2222;
+    background-color: #222;
     color: #fff;
 }
 
@@ -51,9 +51,7 @@ h1,h2,h3,h4,h5,h6 {font-family: 'Merriweather', 'Century Gothic', 'Times New Rom
 .text-faded { color: rgba(255,255,255,.7); }
 
 section {
-    padding-bottom: 30px;
-    padding-top: 30px;
-    height: 100vh;
+    height: 50vh;
 }
 
 aside {
@@ -364,7 +362,7 @@ fieldset[disabled] .btn-primary.active {
 
 .btn {
     border: 0;
-    border-radius: 300px;
+    
     text-transform: uppercase;
     font-family: 'Merriweather', 'Century Gothic', serif;
     font-weight: 700;
@@ -510,7 +508,6 @@ div.title-text > div.subtitle {
     font-size: 36px;
     font-weight: 300;
     margin: auto;
-    text-align: center;
 }
 .taller {
     line-height: 3em;
@@ -572,17 +569,21 @@ div.title-text > div.subtitle {
     background-position: 12px 0;
     background-repeat-x: no-repeat;
     background-repeat-y: no-repeat;
-    top: 5%;
-    left: 5%;
-    width: 88px;
-    margin-left: 20px;
-    height: 109px;
+    top: 50px;
+    left: 50px;
+    height: 110px;
+    width: 110px;
     padding-top: 35px;
     padding-right: 60px;
+    border-radius: 60px;
+    background-color: rgba(68, 129, 239, 1); 
 }
 
 .magic-holder:hover {
-    background-color: rgba(34, 34, 34, 0.2);
+    background-color: rgba(239, 239, 239, 0.8);
+}
+.magic-holder.active {
+    background-color: rgba(68, 68, 68, 0.9);
 }
 
 .scroll-down-arrow {
@@ -605,8 +606,8 @@ div.title-text > div.subtitle {
 section {
     position: relative;
     max-width: 100%;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 }
 
 section#play {
@@ -624,13 +625,13 @@ section#play {
 }
 
 .top-level-row img.slide {
-    width: 500px;
-    height: 312px;
+    width: 300px;
+    height: 187px;
     margin-top: 30%;
 }
 
 #carousel {
-    top: 20vh;
+    margin:auto;
 }
 
 div.tooltip-inner {
@@ -642,8 +643,7 @@ div.tooltip-inner {
 }
 
 div.tooltip-arrow {
-    border-top-color: rgb(130, 10, 10) !important;
-    border-top-width: 10px;
+
 }
 
 div.comic {
@@ -659,12 +659,6 @@ div.page-scroll-holder {
     left: 45%;
 }
 
-#bgholder {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    z-index: -1;
-}
 
 .header h1 {
     text-align: center;
@@ -680,14 +674,19 @@ div.page-scroll-holder {
 section {
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#jellyfish {
+    background-image: url('/src/theme/img/header.jpg');
 }
 
 #explain {
     background-image: url('/src/theme/img/header2.jpg');
 }
 
-#camerafx {
-    background-image: url('/src/theme/img/header4.jpg');
+#camerafx 
+{    background-image: url('/src/theme/img/header4.jpg');
 }
 #iconfx {
     background-image: url('/src/theme/img/header6.jpg');
@@ -708,4 +707,68 @@ section {
 
 #nv1 {
     padding-left: 10px;
+}
+.title-main {
+    position: absolute;
+    z-index: 10000;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+.effect-holder {
+    width: 100%;
+    text-align: center;
+}
+.carousel-caption {
+    top: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: auto;
+    margin-bottom: 20px;
+}
+#planeCarousel {
+    margin: auto;
+}
+.planecarousel-img {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+}
+
+.planecarousel-img img {
+    margin: auto;
+    transition: all 0.5s ease-out;
+}
+
+.planecarousel-img img:hover {
+    transform: scale(1.5);
+};
+
+.freeform-img {
+    display: inline-block;
+    padding: 5px;
+    text-align: center;
+    margin: auto !important;
+}
+.freeform-img > * {
+    padding: 5px;
+}
+
+.enable-btn-carrier {
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
+    z-index: 10000;
+    margin-left: 5px;
+    margin-top: 5px;
+   /* left: 40%;
+    left: 40vw;
+    top: 40%;
+    top: 40vh;
+    position: absolute;*/
 }

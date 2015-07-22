@@ -116,6 +116,14 @@ CarouselEffect.prototype.render = function () {
     this.carousel.rotation.y = this.carousel.rotation.y + Math.PI / 500;
 };
 
+CarouselEffect.prototype.show = function() {
+    $(this.renderer.domElement).show();
+};
+
+CarouselEffect.prototype.hide = function() {
+    $(this.renderer.domElement).hide();
+};
+
 CarouselEffect.getImagePlane = function (texture) {
 
     var plane = new THREE.PlaneBufferGeometry(texture.image.width, texture.image.height, 1, 1); //image.width, image.height);

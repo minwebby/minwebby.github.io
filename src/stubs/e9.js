@@ -1,11 +1,33 @@
 var IconShine = (function(){
 
-	var _funcs = [];
+	var _started = false,
+		_startFuncs = [],
+		_showFuncs = [],
+		_hideFuncs = [],
+		_funcs = {
+			start: function() {
+				for (var i = 0, e = _startFuncs.length; i < e; ++i) {
+					_startFuncs[i]();
+				}
+				_started = true;
+			},
+			show: function() {
+				for (var i = 0, e = _showFuncs.length; i < e; ++i) {
+					_showFuncs[i]();
+				}
+			},
+			hide: function() {
+				for (var i = 0, e = _hideFuncs.length; i < e; ++i) {
+					_hideFuncs[i]();
+				}	
+			},
+			isStarted: function() {
+				return _started;
+			}
+		};
 
 	function _start() {
-		for (var i = 0, e = _funcs.length; i < e; ++i) {
-			setTimeout(_funcs[i], 0);
-		}
+		
 	}
 
 	function _apply(effect, objectURL, parentNode) {
@@ -13,14 +35,16 @@ var IconShine = (function(){
 		_jqParent = $(_parent);
 		var img = _parent.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
-			_funcs.push( function() {
+			_startFuncs.push( function() {
 				var d = img.height / img.width;
 				img.width = 100;
 				img.height = d * 100;
 				effect.setTarget(img);
 				effect.setForever();
 				effect.start();
-			} );
+			});
+			_showFuncs.push( function() { effect.show(); } );
+			_hideFuncs.push( function() { effect.hide(); } );
 		});
 		img.style.position = "absolute";
 		img.style.width = "100px";
@@ -145,6 +169,13 @@ var IconShine = (function(){
 		this.forever = true;
 	};
 
+	_IconShine.prototype.show = function() {
+		$(this.glCanvas.renderer.domElement).show();
+	};
+	_IconShine.prototype.hide = function() {
+		$(this.glCanvas.renderer.domElement).hide();
+	}
+
 	_IconShine.prototype.start = function() {
 		var _cl = 0;
 
@@ -185,7 +216,7 @@ var IconShine = (function(){
 	return {
 		effect: _IconShine,
 		apply: _apply,
-		mkawesome: _start
+		mkawesome: _funcs
 	};
 
 })();

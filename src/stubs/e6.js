@@ -156,12 +156,20 @@ var SwimmingText = (function() {
     };
 
     function _show() {
-        renderer.domElement.style.display = "block";
+        $(renderer.domElement).show();
+    }
+
+    function _hide() {
+        $(renderer.domElement).hide();
     }
 
     return {
         effect: _SwimmingTextEffect,
-        mkawesome: _show
+        mkawesome: {
+            start: _show,
+            show: _show,
+            hide: _hide
+        } 
     };
 
 })();

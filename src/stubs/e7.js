@@ -9,7 +9,8 @@
 var CarBox = (function() {
 	var _parent = null,
 		_jqParent = null,
-		_funcs = {};
+		_funcs = {},
+		_started = false;
 
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
@@ -26,6 +27,16 @@ var CarBox = (function() {
 
 		_funcs.start = function() {		
 			effect.start();
+			_started = true;
+		};
+		_funcs.hide = function() {
+			effect.hide();
+		};
+		_funcs.show = function() {
+			effect.show();
+		};
+		_funcs.isStarted = function() {
+			return _started;
 		};
 	}
 
@@ -154,6 +165,7 @@ var CarBox = (function() {
 
 	function _CarBoxEffect() {
 		this.glCanvas = null;
+		this.stopped = false;
 	}
 
 	_CarBoxEffect.prototype.setTarget = function(url, target, w, h) {
@@ -162,8 +174,12 @@ var CarBox = (function() {
 	};
 
 	_CarBoxEffect.prototype.start = function() {
-		var dt = 0;
+		var dt = 0,
+			that = this;
 		var update = function(cv, elapsedTime, delta) {
+			if (that.stopped) {
+				return;
+			}
 			var eTime = elapsedTime / 2.0;
 			var st = Math.sin(eTime), ct = Math.cos(eTime);
 			var t = (300.0 + 150 * st + 150 * ct) + dt;
@@ -176,6 +192,12 @@ var CarBox = (function() {
 			cv.render();
 		};
 		(new AnimationFrameGen([update, render], this.glCanvas)).start();
+	};
+	_CarBoxEffect.prototype.show = function() {
+		this.stopped = false;
+	};
+	_CarBoxEffect.prototype.hide = function() {
+		this.stopped = true;
 	};
 
 	return {

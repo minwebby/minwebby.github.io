@@ -26,7 +26,13 @@ var SplashColor = (function() {
 					_parent.removeChild(img);
 					_parent.removeChild(noiseTexture);
 					effect.start();
-				}
+				};
+				_funcs.show = function() {
+					effect.show();
+				};
+				_funcs.hide = function() {
+					effect.hide();
+				};
 			});
 			img.style.position = "absolute";
 			img.width = 375; // _jqParent.innerWidth();
@@ -205,6 +211,14 @@ var SplashColor = (function() {
 			cv.render();
 		};
 		(new AnimationFrameGen([update, render], this.glCanvas)).start();
+	};
+
+	_SplashColorEffect.prototype.show = function() {
+		$(this.glCanvas.renderer.domElement).show();
+	};
+
+	_SplashColorEffect.prototype.hide = function() {
+		$(this.glCanvas.renderer.domElement).hide();
 	};
 
 	return {
