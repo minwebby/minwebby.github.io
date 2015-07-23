@@ -1,20 +1,55 @@
 var IconShine = (function(){
 
+	var _started = false,
+		_startFuncs = [],
+		_showFuncs = [],
+		_hideFuncs = [],
+		_funcs = {
+			start: function() {
+				for (var i = 0, e = _startFuncs.length; i < e; ++i) {
+					_startFuncs[i]();
+				}
+				_started = true;
+			},
+			show: function() {
+				for (var i = 0, e = _showFuncs.length; i < e; ++i) {
+					_showFuncs[i]();
+				}
+			},
+			hide: function() {
+				for (var i = 0, e = _hideFuncs.length; i < e; ++i) {
+					_hideFuncs[i]();
+				}
+			},
+			isStarted: function() {
+				return _started;
+			}
+		};
+
+	function _start() {
+
+	}
+
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 		var img = _parent.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
-			console.log("here");
-			effect.setTarget(img);
-			effect.setForever();
-			//_parent.removeChild(img);
-			effect.start();
+			_startFuncs.push( function() {
+				var d = img.height / img.width;
+				img.width = 100;
+				img.height = d * 100;
+				effect.setTarget(img);
+				effect.setForever();
+				effect.start();
+			});
+			_showFuncs.push( function() { effect.show(); } );
+			_hideFuncs.push( function() { effect.hide(); } );
 		});
 		img.style.position = "absolute";
-		// img.width = window.innerWidth;
-		//img.height = img.height * (img.width / );
+		img.style.width = "100px";
 		img.src = objectURL;
+		img.style.display = "none";
 	}
 
 
@@ -35,8 +70,10 @@ var IconShine = (function(){
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.OrthographicCamera(obj.width / -2, obj.width / 2, obj.height / 2, obj.height / -2, 0.01, 15000 );
 		this.camera.position.z = 2000;
-		this.renderer = new THREE.WebGLRenderer();
+		this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 		this.renderer.setSize(obj.width, obj.height);
+		console.log(obj.width + " " + obj.height);
+		this.renderer.setClearColor(0xffffff, 1);
 		par.appendChild(this.renderer.domElement);
 		this.uniforms = {};
 		this.delta = 0;
@@ -65,8 +102,8 @@ var IconShine = (function(){
 		var material =  new THREE.ShaderMaterial( {
 			uniforms: this.uniforms,
 			vertexShader: document.getElementById( 'vs0' ).textContent,
-			fragmentShader: document.getElementById( 'fs4' ).textContent
-
+			fragmentShader: document.getElementById( 'fs4' ).textContent,
+			transparent: true, opacity: 0.0
 		} );
 
 		//console.log(plane);
@@ -132,10 +169,17 @@ var IconShine = (function(){
 		this.forever = true;
 	};
 
+	_IconShine.prototype.show = function() {
+		$(this.glCanvas.renderer.domElement).show();
+	};
+	_IconShine.prototype.hide = function() {
+		$(this.glCanvas.renderer.domElement).hide();
+	}
+
 	_IconShine.prototype.start = function() {
 		var _cl = 0;
 
-		var _dRad = 0.005;
+		var _dRad = 0.008;
 		var _sign = 1;
 		var update = function(cv, elapsedTime, delta) {
 			if(cv.delta == 0){
@@ -143,7 +187,7 @@ var IconShine = (function(){
 				_dRad = 0;
 			}
 			else{
-				_dRad = _sign* 0.005;
+				_dRad = _sign* 0.008;
 			}
 			// console.log(_dRad);
 			var _centerX = cv.uniforms.centerX.value;
@@ -171,7 +215,8 @@ var IconShine = (function(){
 
 	return {
 		effect: _IconShine,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 
 })();

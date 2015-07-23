@@ -7,21 +7,32 @@
 */
 var SplashColor = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {};
 
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
-
+		
 		var noiseTexture = _parent.appendChild(document.createElement("img"));
 		noiseTexture.addEventListener("load", function() {
 			var img = _parent.appendChild(document.createElement("img"));
 			img.addEventListener("load", function() {
-				effect.setTarget(img, noiseTexture);
-				effect.setForever();
-				_parent.removeChild(img);
-				_parent.removeChild(noiseTexture);
-				effect.start();
+				img.style.display = "none";
+				noiseTexture.style.display = "none";
+				_funcs.start = function() {
+					effect.setTarget(img, noiseTexture);
+					effect.setForever();
+					_parent.removeChild(img);
+					_parent.removeChild(noiseTexture);
+					effect.start();
+				};
+				_funcs.show = function() {
+					effect.show();
+				};
+				_funcs.hide = function() {
+					effect.hide();
+				};
 			});
 			img.style.position = "absolute";
 			img.width = 375; // _jqParent.innerWidth();
@@ -91,7 +102,7 @@ var SplashColor = (function() {
 	}
 
 	GLCanvas.prototype.drawImage = function(image, noiseImage) {
-		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); 
+		var plane = new THREE.PlaneBufferGeometry(image.width, image.height, 1, 1); 
 
 		var imgTexture = new THREE.Texture(image);
 		imgTexture.needsUpdate = true;
@@ -175,16 +186,22 @@ var SplashColor = (function() {
 
 	_SplashColorEffect.prototype.start = function() {
 		var _cl = 0;
-		var _dirX = 0.005;
-		var _dirY = 0.005;
+		var _dirX = 0.1;
+		var _dirY = 0.1;
+		var _posX = 0.5;
+		var _posY = 0.5;
 		var update = function(cv, elapsedTime, delta) {
-			_cl += 4.0 * delta;
+			_cl += 100.0 * delta;
 			if (_cl >= 0.00008) {
 				if (cv.splashMask) {
 					var center = cv.splashMask.splash2();
 					if (center) {
-						cv.uniforms.centerX.value += Math.sin(center.x / 10.0);
-						cv.uniforms.centerY.value += Math.sin(center.y / 10.0);
+						_posX += _dirX * Math.sin(center.x / 10.0);
+						_posY += _dirY * Math.sin(center.y / 10.0);
+						if (_posX > 0.9 || _posX < 0.1) { _dirX = -_dirX; }
+						if (_posY > 0.9 || _posY < 0.1) { _dirY = -_dirY; }
+						cv.uniforms.centerX.value = _posX;
+						cv.uniforms.centerY.value = _posY;
 					}
 				}
 				_cl = 0;
@@ -196,8 +213,17 @@ var SplashColor = (function() {
 		(new AnimationFrameGen([update, render], this.glCanvas)).start();
 	};
 
+	_SplashColorEffect.prototype.show = function() {
+		$(this.glCanvas.renderer.domElement).show();
+	};
+
+	_SplashColorEffect.prototype.hide = function() {
+		$(this.glCanvas.renderer.domElement).hide();
+	};
+
 	return {
 		effect: _SplashColorEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();

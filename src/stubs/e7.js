@@ -8,19 +8,36 @@
 */
 var CarBox = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {},
+		_started = false;
 
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 
 		var w = _jqParent.width(), h =  _jqParent.height();
+			w = 800; 
+			h = 500;
 
-		w = document.documentElement ? document.documentElement.offsetWidth : $(Window).width();
-		h = document.documentElement ? document.documentElement.offsetHeight : $(Window).height();
+		// w = document.documentElement ? document.documentElement.offsetWidth : $(window).width();
+		// h = document.documentElement ? document.documentElement.offsetHeight : $(window).height();
 
 		effect.setTarget(objectURL, _parent, w, h);
-		effect.start();
+
+		_funcs.start = function() {		
+			effect.start();
+			_started = true;
+		};
+		_funcs.hide = function() {
+			effect.hide();
+		};
+		_funcs.show = function() {
+			effect.show();
+		};
+		_funcs.isStarted = function() {
+			return _started;
+		};
 	}
 
 	function GLCanvas(obj, width, height) {
@@ -85,6 +102,8 @@ var CarBox = (function() {
 		var skyboxGeom = new THREE.CubeGeometry( 5000, 5000, 5000, 1, 1, 1 );
 		var skybox = new THREE.Mesh( skyboxGeom, skyboxMaterial );
 		this.scene.add( skybox );
+
+
 	}
 
 	
@@ -119,6 +138,8 @@ var CarBox = (function() {
 					car.position.z = -20;
 					car.receiveShadow = false;
 					that.scene.add( car );
+
+					that.renderer.render(that.scene, that.camera);
 				}, 
 				function ( xhr ) {}
 			);
@@ -144,6 +165,7 @@ var CarBox = (function() {
 
 	function _CarBoxEffect() {
 		this.glCanvas = null;
+		this.stopped = false;
 	}
 
 	_CarBoxEffect.prototype.setTarget = function(url, target, w, h) {
@@ -152,8 +174,12 @@ var CarBox = (function() {
 	};
 
 	_CarBoxEffect.prototype.start = function() {
-		var dt = 0;
+		var dt = 0,
+			that = this;
 		var update = function(cv, elapsedTime, delta) {
+			if (that.stopped) {
+				return;
+			}
 			var eTime = elapsedTime / 2.0;
 			var st = Math.sin(eTime), ct = Math.cos(eTime);
 			var t = (300.0 + 150 * st + 150 * ct) + dt;
@@ -167,10 +193,17 @@ var CarBox = (function() {
 		};
 		(new AnimationFrameGen([update, render], this.glCanvas)).start();
 	};
+	_CarBoxEffect.prototype.show = function() {
+		this.stopped = false;
+	};
+	_CarBoxEffect.prototype.hide = function() {
+		this.stopped = true;
+	};
 
 	return {
 		effect: _CarBoxEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();
 
