@@ -7,22 +7,35 @@
 */
 var TorchLight = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {},
+		_started = false;
 
 	function _apply(effect, objectURL, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 		var img = _parent.appendChild(document.createElement("img"));
 		img.addEventListener("load", function() {
-			effect.setTarget(img);
-			effect.setForever();
-			//_parent.removeChild(img);
-			effect.start();
+			_funcs.start = function() {
+				effect.setTarget(img);
+				effect.setForever();
+				//_parent.removeChild(img);
+				effect.start();
+				_started = true;
+			};
+			_funcs.isStarted = function() {
+				return _started;
+			};
+			_funcs.show = function() {
+				effect.show();
+			};
+			_funcs.hide = function() {
+				effect.hide();
+			};
+
 		});
-		img.style.position = "absolute";
-		img.width = _jqParent.innerWidth();
-		//img.height = _jqParent.innerHeight();
-		img.style.left = "0px";
+		img.width = 375; 
+		img.setAttribute("id", "torchImg");
 		img.src = objectURL;
 	}
 
@@ -42,7 +55,7 @@ var TorchLight = (function() {
 	}
 
 	GLCanvas.prototype.drawImage = function(image) {
-		var plane = new THREE.PlaneGeometry(image.width, image.height, 1, 1); //image.width, image.height);
+		var plane = new THREE.PlaneBufferGeometry(image.width, image.height, 1, 1); //image.width, image.height);
 
 		var imgTexture = new THREE.Texture(image);
 		imgTexture.needsUpdate = true;
@@ -75,10 +88,7 @@ var TorchLight = (function() {
 		this.mesh.position.z = -10;
 		//this.mesh.rotation.set(0.1, -0.9, 0);
 		this.scene.add(this.mesh);
-
 		this.renderer.render(this.scene, this.camera);
-		this.renderer.domElement.style.position = "absolute";
-		this.renderer.domElement.style.left = "0px";
 	};
 
 	GLCanvas.prototype.render = function() {
@@ -126,6 +136,13 @@ var TorchLight = (function() {
 		this.forever = true;
 	};
 
+	_TorchLightEffect.prototype.show = function() {
+		$(this.glCanvas.renderer.domElement).show();
+	};
+	_TorchLightEffect.prototype.hide = function() {
+		$(this.glCanvas.renderer.domElement).hide();	
+	};
+
 	_TorchLightEffect.prototype.start = function() {
 		var _cl = 0;
 		var _dirX = 0.005;
@@ -167,6 +184,7 @@ var TorchLight = (function() {
 
 	return {
 		effect: _TorchLightEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();

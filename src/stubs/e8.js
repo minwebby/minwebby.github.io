@@ -7,17 +7,31 @@
 */
 var ButtonBar = (function() {
 	var _parent = null,
-		_jqParent = null;
+		_jqParent = null,
+		_funcs = {}, _started = false;
 
 	function _apply(effect, parentNode) {
 		_parent = parentNode;
 		_jqParent = $(_parent);
 		effect.setTarget(parentNode);
-		effect.start()
+		//effect.start()
+		_funcs.start = function() { 
+			effect.start(); 
+			_started = true;
+		};
+		_funcs.isStarted = function() {
+			return _started;
+		};
+		_funcs.show = function() {
+			effect.show();
+		};
+		_funcs.hide = function() {
+			effect.hide();
+		};
 	}
 
 	function GLCanvas(obj) {
-		var par = obj.parentNode,
+		var par = _parent,
 			width = 900,
 			height = 200;
 
@@ -46,10 +60,10 @@ var ButtonBar = (function() {
 	    };
 
 	    var geometries = [
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1),
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1),
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1),
-	     	new THREE.PlaneGeometry(this.btnWidth, this.btnHeight, 1, 1)
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1),
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1),
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1),
+	     	new THREE.PlaneBufferGeometry(this.btnWidth, this.btnHeight, 1, 1)
 	    ];
 
 
@@ -70,14 +84,18 @@ var ButtonBar = (function() {
 			this.scene.add(mesh);
 			x += this.btnWidth + spc;
 		}
-	        
+	    
 	    par.appendChild(this.renderer.domElement);
 
 	    var that = this;
 	    $(this.renderer.domElement).hover(function() {
-	    	that.uniforms.over.value = 1.0;
+	    	if (!that.stopped) {
+	    		that.uniforms.over.value = 1.0;
+	    	}
 	    }, function() {
-	    	that.uniforms.over.value = 0.1;
+	    	if (!that.stopped) {
+	    		that.uniforms.over.value = 0.1;
+	    	}
 	    });
     }
         
@@ -120,6 +138,7 @@ var ButtonBar = (function() {
 		this.toTime = 0;
 		this.glCanvas = null;
 		this.animFrame = null;
+		this.stopped = false;
 	}
 
 	_ButtonBarEffect.prototype.setTarget = function(target) {
@@ -136,16 +155,26 @@ var ButtonBar = (function() {
 	_ButtonBarEffect.prototype.start = function() {
         var that = this;
 		var update = function(cv, elapsedTime, delta) {
-          	cv.uniforms.time.value = elapsedTime;
+			if (!that.stopped) {
+          		cv.uniforms.time.value = elapsedTime;
+          	}
 		},
 		render = function(cv, elapsedTime, delta) {
 			cv.render();
 		};
 		(new AnimationFrameGen([update, render], this.glCanvas)).start();
 	};
+	_ButtonBarEffect.prototype.show = function() {
+		this.stopped = false;
+	};
+	_ButtonBarEffect.prototype.hide = function() {
+		this.stopped =  true;
+		console.log("stopped");
+	};
 
 	return {
 		effect: _ButtonBarEffect,
-		apply: _apply
+		apply: _apply,
+		mkawesome: _funcs
 	};
 })();

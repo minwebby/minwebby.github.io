@@ -47,7 +47,7 @@ var SwimmingText = (function() {
         });
     
         _createText();
-        renderer = new THREE.WebGLRenderer({antialias: false});
+        renderer = new THREE.WebGLRenderer({antialias: false, alpha: true});
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(w, h);
         parentContainer.appendChild(renderer.domElement);
@@ -120,7 +120,7 @@ var SwimmingText = (function() {
         var cx = geo.boundingBox.min.x + 0.5 * xx;
         var tmSin = 600.0 * Math.sin(tm * 10.0);
         var t = 0, sint = 0, cost = 0;
-        var trand  = 0;
+        var trand  = 0, gr = 0;
 
         if (Math.abs(tmSin) > 70) {
             t = (tmSin > 0) ? tmSin - 70 : tmSin + 70;
@@ -130,10 +130,12 @@ var SwimmingText = (function() {
                 sint = Math.abs(Math.sin(geo.vertices[i].y));
                 cost = Math.abs(Math.cos(geo.vertices[i].x));
                 trand = Math.abs(Math.cos(geo.vertices[i].z)); 
-                geo.colors[i] = new THREE.Color(sint, cost, trand); // new THREE.Color(sint*sint + 0.5, cost*cost + 0.5, sint*cost + 0.5);
+                gr = Math.min( 0.3 * sint + 0.59 * cost + 0.11 * trand, 1.0 );
+
+                geo.colors[i] = new THREE.Color(gr, gr, gr); // new THREE.Color(sint*sint + 0.5, cost*cost + 0.5, sint*cost + 0.5);
             }
         }
-        textMesh1.material.size +=  0.05 * Math.sin(tm * 10.0);
+        // textMesh1.material.size +=  0.05 * Math.sin(tm * 10.0);
         
         textGeo.colorsNeedUpdate = true;
         textGeo.verticesNeedUpdate = true;
@@ -149,11 +151,25 @@ var SwimmingText = (function() {
     };
 
     _SwimmingTextEffect.prototype.start = function(cont) {
+        renderer.domElement.style.display = "none";
         setTimeout(_animate, 0);
     };
 
+    function _show() {
+        $(renderer.domElement).show();
+    }
+
+    function _hide() {
+        $(renderer.domElement).hide();
+    }
+
     return {
-        effect: _SwimmingTextEffect
+        effect: _SwimmingTextEffect,
+        mkawesome: {
+            start: _show,
+            show: _show,
+            hide: _hide
+        } 
     };
 
 })();
