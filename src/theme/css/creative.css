@@ -801,19 +801,20 @@ input.cmn-toggle-round + label:after {
   width: 58px;
   background-color: #fff;
   border-radius: 100%;
-  background-image: url('/src/theme/img/magic1.png');
-  background-position: 10px 2px;
+  background-image: url('/src/theme/img/magic.svg');
+  background-size: 70%;
+  background-position: 35% 32%;
   background-repeat: no-repeat;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: margin 0.4s;
+  transition: margin 0.1s;
 }
 input.cmn-toggle-round:checked + label:before {
   background-color: rgba(68, 129, 239, 1);  /*#8ce196;*/
 }
 input.cmn-toggle-round:checked + label:after {
   margin-left: 60px;
-  background-image: url('/src/theme/img/magic2.png');
-  background-size: 80%;
+  background-image: url('/src/theme/img/magicblue.svg');
+  background-size: 100%;
 }
 
 .cmn-toggle {
