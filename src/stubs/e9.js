@@ -72,7 +72,7 @@ var IconShine = (function(){
 		this.camera.position.z = 2000;
 		this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 		this.renderer.setSize(obj.width, obj.height);
-		console.log(obj.width + " " + obj.height);
+//		console.log(obj.width + " " + obj.height);
 		this.renderer.setClearColor(0xffffff, 1);
 		par.appendChild(this.renderer.domElement);
 		this.uniforms = {};

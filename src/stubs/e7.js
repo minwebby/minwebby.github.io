@@ -91,10 +91,10 @@ var CarBox = (function() {
 
 		var materialArray = [];
 		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/posx.jpg' ) }));
-		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/negx.jpg' ) }));
+		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/posx.jpg' ) }));
 		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/posy.jpg' ) }));
 		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/negy.jpg' ) }));
-		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/posz.jpg' ) }));
+		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/posx.jpg' ) }));
 		materialArray.push(new THREE.MeshBasicMaterial( { map: THREE.ImageUtils.loadTexture( '/src/theme/img/negz.jpg' ) }));
 		for (var i = 0; i < 6; i++)
 		   materialArray[i].side = THREE.BackSide;
