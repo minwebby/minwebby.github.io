@@ -169,7 +169,7 @@ var ButtonBar = (function() {
 	};
 	_ButtonBarEffect.prototype.hide = function() {
 		this.stopped =  true;
-		console.log("stopped");
+//		console.log("stopped");
 	};
 
 	return {
