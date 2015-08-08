@@ -54,7 +54,7 @@ GLCanvas.prototype.drawImage = function(image) {
 		texture: {type: "t", value: imgTexture},
 		posX: {type: 'f', value: 0.4 },
 		posY: {type: 'f', value: 0.5 },
-		radius: { type: 'f', value: 0.25 },
+		radius: { type: 'f', value: 0.45 },
 		aspectRatioSq: {type: 'f', value: (image.width * image.width) / (image.height * image.height) }
 	};
 

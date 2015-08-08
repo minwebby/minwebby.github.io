@@ -14,7 +14,7 @@
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" type="text/css" rel="styleshet" />
 		<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 		<link href="src/theme/css/animate.min.css" type="text/css" rel="stylesheet" />
-		<link href="src/theme/css/creative.min.css" type="text/css" rel="stylesheet" />
+		<link href="src/theme/css/creative.css" type="text/css" rel="stylesheet" />
 		<link href="bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 		<script>
@@ -27,114 +27,169 @@
 		</script>
 	</head>
 	<body id="page-top" onload="init();">
+		<div class="switch">
+		  <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+		  <label for="cmn-toggle-1"
+		  	id="firstTip"
+		  	onclick="effects.ef1(event);"
+			title="Click this Wand!&nbsp; &nbsp;">
+		  </label>
+		</div>
 		<div class="title-text title-main">
 
     	</div>
-		<div id="mainCarousel" class="carousel slide" data-ride="carousel" >
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-			    <div class="item active">
-			      	<section class="header" id="jellyFish">
+    	
+		<section class="header" id="jellyFish">
+	    	<div id="mainHeader">
+	    		<div id="bgholder">
+	    		</div>
+	    	</div>
 
-				    	<div id="mainHeader">
-				    		<div id="bgholder">
-				    		</div>
-				    	</div>
-				    </section>
-				    <div class="carousel-caption">
-				    	<img src="src/theme/img/fw1.png"/>
-        				<div class="subtitle">An online tool for creating visual motion effects for the web.</div>
-        			<!-- 	<div class="enable-btn-carrier magic-holder" onclick="effects.ef1(event);"
-        					id="firstTip"
-        					data-toggle="tooltip" data-placement="left" title="Click this Wand!&nbsp; &nbsp;(And all the others..)"
-        					>
-			      			&nbsp;
-			      		</div> -->
-
-			      		<div class="switch">
-						  <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
-						  <label for="cmn-toggle-1"
-						  	id="firstTip"
-						  	onclick="effects.ef1(event);"
-        					data-toggle="tooltip" data-placement="left" 
-        					title="Click this Wand!&nbsp; &nbsp;"
-						  >
-						  </label>
-						</div>
-
-				    </div>
-			    </div>
-			    <div class="item">
-			       	<section id="explain" class="vertical-center">
+	    	<div class="carousel-caption">
+			    	<img src="src/theme/img/fw1.png"/>
+    				<div class="subtitle">An online tool for creating visual motion effects for the web.</div>
+			</div>
+			<div class="carousel-like">
+		    	<div class="row">
+		    		<div class="col-lg-2">
+		    			<div class="brn">Images <br/> <span class="jel">(PNGs, JPEGs, PSDs)</span></div>
+		    			<div class="brn">3D Models <br/><span class="jel"> (STLs, OBJs, PLYs) </span> </div>
+		    			<div class="brn">Text <br/><span class="jel"> (in any webfonts) </span> </div>
+		    		</div>
+		    		<div class="col-lg-1 row"><br/>
+		    			<div class="scion">&#57472;</div>
+		    		</div>
+		    		<div class="col-lg-6 products">
+		    			<div class="row">
+			    			<div class="col-sm-3">
+			    				Collections <br/><br/>
+			    				<img src="/src/theme/img/icons0.png" data-toggle="modal" data-target="#carouselEffect" />
+			    			</div>
+			    			<div class="col-sm-3">
+			    				3D Showcases<br/><br/><img src="/src/theme/img/icons1.png" data-toggle="modal" data-target="#effect3D" />
+			    			</div>
+			    			<div class="col-sm-3">
+			    				Backgrounds <br/><br/>
+			    				<img src="/src/theme/img/icons3.png" data-toggle="modal" data-target="#effectBG"/>
+			    			</div>
+			    			<div class="col-sm-3">
+			    				Freeform Effects <br/><br/>
+			    				<img src="/src/theme/img/icons2.png" data-toggle="modal" data-target="#effectFF"/>
+			    			</div>
+			    		</div>
+		    		</div>
+		    		<div class="col-lg-1 row"><br/>
+		    			<div class="scion">&#57472;</div>
+		    		</div>
+		    		<div class="col-lg-2">
+		    			<br/>
+		    			<div class="jen">Output<br/><br/></div>
+		    			<div >Video <br/> &nbsp;</div>
+		    			<div >Animated GIF<br/> &nbsp;</div>
+		    			<div >HTML Bundle<br/> &nbsp;</div>
+		    			<div >Spritesheets<br/> &nbsp;</div>
+		    		</div>
+		    	</div>
+		    </div>
+	    </section>
+		<!-- effect showcases -->
+		<div class="modal fade" id="carouselEffect" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title">Create Carousels
+		          		<input id="cmn-toggle-2" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					 	<label for="cmn-toggle-2"	onclick="effects.ef2(event);"></label>
+		          	</h4>
+		        </div>
+		        <div class="modal-body">
+		          	<div id="explain" >
 				    	<div class="row top-level-row" id="planeCarousel">
-			            	<div class="planecarousel-img" data-toggle="tooltip" data-placement="top" title="Compose Content" >
-			            		<img src="/src/theme/img/sld1.png" class="slide" style="border: 3px solid #fff"  />
+			            	<div class="planecarousel-img" style="position: relative; left: 10%;">
+			            		<img src="/src/theme/img/sld1.jpg" class="slide" style="border: 3px solid #fff"  />
 			            	</div>
-			            	<div class="planecarousel-img" data-toggle="tooltip" data-placement="top" title="Use the Elements to Create Effects">
-			            		<img src="/src/theme/img/sld2.png" class="slide" />
+			            	<div class="planecarousel-img" style="position: absolute; left: 10%;">
+			            		<img src="/src/theme/img/sld2.jpg" class="slide" />
 			            	</div>
-			            	<div class="planecarousel-img" data-toggle="tooltip" data-placement="top" title="Use Templates to Get Your Job Done">
-			            		<img src="/src/theme/img/sld3.png" class="slide"/>
+			            	<div class="planecarousel-img" style="position: absolute; left: 20%;">
+			            		<img src="/src/theme/img/sld3.jpg" class="slide"/>
 			            	</div>
 			            </div>
 				    	<div class="row top-level-row carousel" id="carousel"></div>
-			    	</section>
-			    	<div class="carousel-caption">
-		    			<h2 class="section-heading">What Flitwick Lets You Do</h2>
-		            	<p id="carouselSubHeading">Play with the elements, or use templates to create beautiful 3D animation effects.</p>
-		            	<!-- <div class="enable-btn-carrier magic-holder" onclick="effects.ef2(event);">
-			      			&nbsp;
-			      		</div> -->
-			      		<div class="switch">
-						  <input id="cmn-toggle-2" class="cmn-toggle cmn-toggle-round" type="checkbox">
-						  <label for="cmn-toggle-2"	onclick="effects.ef2(event);"></label>
-						</div>
 			    	</div>
-			    </div>
-			    <div class="item">
-			    	<section class="row text-center effect-type-holder product-showcase-holder top-level-row" id="cameraFx">
-						<div class="row top-level-row text-center vertical-center" >
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		 </div>
+		 <div class="modal fade" id="effect3D" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title"> Full 3D Showcases
+		          		<input id="cmn-toggle-3" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					 	<label for="cmn-toggle-3"	onclick="effects.ef3(event);"></label>
+		          	</h4>
+		        </div>
+		        <div class="modal-body">
+		          	<div class="row text-center product-showcase-holder top-level-row" 
+		          		style="margin-top: 0px; margin-bottom: 0px;"
+		          		id="cameraFx">
+						<div class="row top-level-row text-center ben" 
+							style="margin-top: 0px; margin-bottom: 0px;"
+							>
 			                <div id="effects3D" class="effect-sampler effect-holder">
 			                </div>
 			            </div>
-			        </section>
-			        <div class="carousel-caption">
-			        	<h2 class="carousel-heading">Create Product Showcases</h2>
-			            <p>Flitwick helps your users experience your full 360 imagination.</p>
-			            <div class="switch">
-						  <input id="cmn-toggle-3" class="cmn-toggle cmn-toggle-round" type="checkbox">
-						  <label for="cmn-toggle-3"	onclick="effects.ef3(event);"></label>
-						</div>
 			        </div>
-			    </div>
-			    <div class="item">
-			    	<section class="row text-center effect-type-holder product-showcase-holder top-level-row" id="controlsFx">
-						<div class="row text-center top-level-row vertical-center" >
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		 </div>
+		 <div class="modal fade" id="effectBG" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title"> Backgrounds and Controls
+		          		<input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					 	<label for="cmn-toggle-4"	onclick="effects.ef4(event);"></label>
+		          	</h4>
+		        </div>
+		        <div class="modal-body">
+		          	<div class="row text-center product-showcase-holder top-level-row" id="controlsFx">
+						<div class="row text-center top-level-row ben" >
 			                <div id="effectControls" class="effect-sampler effect-holder">
 			        	     </div>
 			        	</div>
-			           <!--  <div class="nav-btn-holder scroll-down-arrow" id="nv10">
-			            	<a href="#freeform" class="btn page-scroll" id="downscroll1"
-								     style="transform: rotate(90deg); font-size: 40px; color: #fff;">
-								    	<span class="btm-scroll-btn">&#57472;&#57472;</span>
-							</a>
-			            </div> -->
-					</section>
-					<div class="carousel-caption">
-					 	<h2 class="carousel-heading">Create Backgrounds</h2>
-		                <p>Create amazing animated backgrounds and controls.</p>
-		                <!-- <div class="enable-btn-carrier magic-holder" onclick="effects.ef4(event);">
-			      			&nbsp;
-			      		</div> -->
-			      		 <div class="switch">
-						  <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round" type="checkbox">
-						  <label for="cmn-toggle-4"	onclick="effects.ef4(event);"></label>
-						</div>
 					</div>
-			    </div>
-			    <div class="item">
-			    	<section  id="freeform" style="text-align: center;">
-				    	<div class="row top-level-row vertical-center" style="margin: auto; width: 85%; text-align: center;">
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
+		 </div>
+		 <div class="modal fade" id="effectFF" role="dialog">
+		    <div class="modal-dialog modal-lg">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          	<h4 class="modal-title"> Free-form Effects
+		          		<input id="cmn-toggle-5" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					 	<label for="cmn-toggle-5"	onclick="effects.ef5(event);"></label>
+		          	</h4>
+		        </div>
+		        <div class="modal-body">
+		          	<div  id="freeform" style="text-align: center;">
+				    	<div class="row top-level-row ben" style="margin: auto; width: 85%; text-align: center;">
 				    		<div class="freeform-img" id="lightFx" style="margin: auto;">
 			                	<div class="effect-holder">
 				                    <h2 class="carousel-heading">Light</h2>
@@ -145,13 +200,20 @@
 				                	</div>
 				            	</div>
 			            	</div>
-
-			            	<div class="freeform-img" id="shapeFx" style="margin: auto;">
+			            	<div class="freeform-img" id="colorFx" style="margin: auto;">
 			            		<div class="effect-holder">
-				                    <h2 class="carousel-heading">Shape</h2>
-				                    <p>Make objects dance to your tunes with Flitwick.</p>
+				                	<h2 class="carousel-heading">Color and Masks</h2>
+				                    <p>Bring out your true colors in Flitwick.</p>
 				                </div>
 				                <div class="text-center effect-holder-outer">
+					            	<div id="effectsColor1" class="effect-sampler effect-holder">
+					            		<img src="/src/theme/img/tulips.jpg"  width="375" height="250" id="tulipImg"/>
+					                </div>
+					            </div>
+				            </div>
+
+			            	<div class="freeform-img" id="shapeFx" style="margin: auto; position: absolute; left: 30%; top: 20%;">
+			            		<div class="text-center effect-holder-outer">
 					            	<div id="effectsText1" class="effect-sampler effect-holder">
 					            		<div class="comic" id="comic">
 					            			Shapes
@@ -160,69 +222,22 @@
 						        </div>
 				            </div>
 
-			            	<div class="freeform-img" id="colorFx" style="margin: auto;">
-			            		<div class="effect-holder">
-				                	<h2 class="carousel-heading">Color</h2>
-				                    <p>Bring out your true colors in Flitwick.</p>
-				                </div>
-				                <div class="text-center effect-holder-outer">
-					            	<div id="effectsColor1" class="effect-sampler effect-holder">
-					            		<img src="/src/theme/img/tulips.jpg"  width="375" height="250" id="tulipImg"/>
-					                </div>
-					            </div>
-				             </div>
-
 				        </div>
-			    	</section>
-			    	<div class="carousel-caption">
-			    		<h2 class="carousel-heading">Create Freeform effects</h2>
-	                    <p>You can design your own effects playing with the visual elements.</p>
-	                 <!--    <div class="enable-btn-carrier magic-holder" onclick="effects.ef5(event);">
-			      			&nbsp;
-			      		</div> -->
-			      		<div class="switch">
-						  <input id="cmn-toggle-5" class="cmn-toggle cmn-toggle-round" type="checkbox">
-						  <label for="cmn-toggle-5"	onclick="effects.ef5(event);"></label>
-						</div>
 			    	</div>
-		    	</div>
-			</div>
-			<!-- controls -->
-			<!-- <div class="nav-btn-holder scroll-down-arrow" id="nv6">
-            	<a href="#iconfx" class="btn page-scroll" id="downscroll1"
-					     style="transform: rotate(90deg); font-size: 40px; color: #fff;">
-					    	<span class="btm-scroll-btn">&#57472;&#57472;</span>
-				</a>
-            </div> -->
-            <a class="left carousel-control" href="#mainCarousel" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			    <span class="sr-only">Previous</span>
-			</a>
-			<a class="right carousel-control" href="#mainCarousel" role="button" data-slide="next"
-
-			>
-				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" id="secondTip"
-        		data-toggle="tooltip" data-placement="left" title="More this way"></span>
-				<span class="sr-only">Next</span>
-			</a>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        </div>
+		      </div>
+		    </div>
 		</div>
-		<div id="thirdTip" data-toggle="tooltip" data-placement="top" title="Seen Enough? Scroll Down.."
-			class="nav-btn-holder scroll-down-arrow">
-			<a href="#iconfx" class="btn page-scroll" id="downscroll1"
-				     style="transform: rotate(90deg); font-size: 40px; color: #fff;">
-				    	<span class="btm-scroll-btn">&#57472;</span>
-			</a>
-        </div>
 		<section class="row top-level-rowtext-center effect-type-holder free-form-effects top-level-row" id="iconfx">
 			<div class="row top-level-row text-center">
                 <h2 id="logosHeading"  class="carousel-heading">Features</h2>
                 <p id="logosSubHeading">Still not convinced. Look at the whole set of features.</p>
-               <!--  <div class="enable-btn-carrier magic-holder" style="left: 20vw; top: 1vh;"  onclick="effects.ef6(event);">
-	           		&nbsp;
-            	</div> -->
-            	 <div class="switch">
-						  <input id="cmn-toggle-6" class="cmn-toggle cmn-toggle-round" type="checkbox">
-						  <label for="cmn-toggle-6"	onclick="effects.ef6(event);"></label>
+               	<div class="switch">
+					<input id="cmn-toggle-6" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<label for="cmn-toggle-6" onclick="effects.ef6(event);"></label>
 				</div>
             </div>
         	<div class="vsep vsep20">&nbsp;</div>
@@ -298,31 +313,18 @@
         			</table>
 	    	 	</div>
     	 	</div>
-
-            <div class="nav-btn-holder scroll-down-arrow" id="nv8">
-            	<a href="#howworks" class="btn page-scroll" id="downscroll1"
-					     style="transform: rotate(90deg); font-size: 40px; color: #fff;">
-					    	<span class="btm-scroll-btn">&#57472;&#57472;</span>
-				</a>
-            </div>
 		</section>
 	    <section class="bg-primary text-center" id="howworks" style="padding-top: 40px;">
     		<div class="row text-center top-level-row">
                 <h2 class="carousel-heading">How Flitwick works..</h2>
                 <p>Magically ofcourse...</p>
             </div>
-            <div class="vsep vsep20">&nbsp;</div>
+            <div class="vsep vsep10">&nbsp;</div>
              <iframe width="50%" height="50%"
                  id="video-holder"                 
              style="margin: auto;"
              src="" frameborder="0" allowfullscreen></iframe>
 
-             <div class="nav-btn-holder scroll-down-arrow" id="nv15">
-            	<a href="#contact" class="btn page-scroll" id="downscroll1"
-					     style="transform: rotate(90deg); font-size: 40px; color: #fff;">
-					    	<span class="btm-scroll-btn">&#57472;&#57472;</span>
-				</a>
-            </div>
         </section>
 	    <!-- <section class="bg-primary" id="features">
 	        <br/>
@@ -651,12 +653,9 @@
 		<script type="text/javascript">
 			function init() {
 				Waver.apply(new Waver.effect(), "/src/theme/img/header.jpg");
-				$('[data-toggle="tooltip"]').tooltip();
 				setTimeout(function() { $("#mainCarousel").carousel("pause"); }, 3000);
 				$("#carousel").hide();
-				$("#thirdTip").hide();
-				setTimeout(function() { $('#firstTip').tooltip('show'); }, 2000);
-
+				
 				var allOthers = function() {
 
 					TorchLight.apply(new TorchLight.effect(), "/src/theme/img/header3.jpg", document.getElementById("effectsSampler"));
@@ -691,12 +690,6 @@
 								setTimeout(falseFunc, 0);
 							}
 							++_seenCount;
-							if (_seenCount > 9) {
-								$("#thirdTip").show();
-							}
-							if (_seenCount > 12) {
-								$("#thirdTip").tooltip("show");
-							}
 						};
 					},
 					_handlers = [];
@@ -715,7 +708,7 @@
 						function() {
 							if (!carouselEffect) {
 								carouselEffect = new CarouselEffect(document.getElementById("carousel"),
-					 						[ "./src/theme/img/sld1.png", "./src/theme/img/sld2.png","./src/theme/img/sld3.png"]);
+					 						[ "./src/theme/img/sld1.jpg", "./src/theme/img/sld2.jpg","./src/theme/img/sld3.jpg"]);
 							} else {
 								carouselEffect.show();
 							}

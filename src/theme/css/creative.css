@@ -432,15 +432,6 @@ div.title-text > div.subtitle {
     margin-top: 5%;
 }
 
-.basic-tile2 {
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #fff;
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    background-image: url('/src/theme/img/sprites3.png');
-    cursor: pointer
-}
 
 #tileLight {
     background-position: -10px -8px;
@@ -517,6 +508,13 @@ div.title-text > div.subtitle {
     font-style:normal;
     line-height: 0.2em;
 }
+.scion {
+    font-family: 'Glyphicons Halflings';
+    font-style:normal;
+    line-height: 2.5em;   
+    font-size: 36pt;
+}
+
 .scroll-dn {
     margin-top: 40px;
     text-align: center;
@@ -625,9 +623,8 @@ section#play {
 }
 
 .top-level-row img.slide {
-    width: 300px;
-    height: 187px;
-    margin-top: 30%;
+    width: 500px;
+    height: 320px;
 }
 
 #carousel {
@@ -681,19 +678,10 @@ section {
     background-image: url('/src/theme/img/header.jpg');
 }
 
-#explain {
-    background-image: url('/src/theme/img/header2.jpg');
+#explain, #camerafx, #iconfx, #freeform, #controlsFx {
+    background: rgba(22, 22, 22, 0.8);
 }
 
-#camerafx 
-{    background-image: url('/src/theme/img/header4.jpg');
-}
-#iconfx {
-    background-image: url('/src/theme/img/header6.jpg');
-}
-#freeform {
-    background-image: url('/src/theme/img/header7.jpg');
-}
 .bg-primary {
     background-color: #222;
 }
@@ -701,9 +689,6 @@ section {
     background-color: #444;
 }
 
-#controlsFx {
-    background-image: url('/src/theme/img/header1.jpg');
-}
 
 #nv1 {
     padding-left: 10px;
@@ -730,7 +715,20 @@ section {
     background-color: rgba(0, 0, 0, 0.3);
     bottom: auto;
     margin-bottom: 20px;
+    position: absolute;
 }
+
+.carousel-like {
+    position: absolute;
+    top: 70%;
+    top: 70vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: auto;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
 #planeCarousel {
     margin: auto;
 }
@@ -740,13 +738,17 @@ section {
     text-align: center;
 }
 
+.planecarousel-img:hover {
+    z-index: 2000;
+}
+
 .planecarousel-img img {
     margin: auto;
-    transition: all 0.5s ease-out;
+    transition: all 0.25s ease-out;
 }
 
 .planecarousel-img img:hover {
-    transform: scale(1.5);
+    transform: scale(1.15);
 };
 
 .freeform-img {
@@ -832,5 +834,55 @@ input.cmn-toggle-round:checked + label:after {
 }
 
 .switch {
-    left: 40%;
+    left: 5%;
+    position: absolute;
+    z-index: 100000;
+}
+
+.products {
+    font-weight: bold;
+}
+
+.brn {
+    padding: 15px;
+    cursor: default;
+    font-weight: 800;
+}
+.brn .jel {
+    font-weight: 200;
+}
+.jen {
+    font-weight: 800;
+}
+
+.products img {
+    width: 150px;
+    transition: all 0.25s ease-out;
+}
+
+.products img:hover {
+    transform: scale(1.35);
+}
+
+.modal-switch {
+    display: inline;
+}
+
+.modal-title {
+    text-align: center;
+    color: #eee;
+    font-weight: 800;
+}
+
+.modal-header, .modal-body {
+    background-color: rgba(22, 22, 22, 0.8);
+}
+
+
+.close { color: #ccc; }
+.close:hover { color: #fff;}
+
+.ben {
+     display: flex;
+  align-items: center;
 }
